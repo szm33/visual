@@ -1,0 +1,1 @@
+Łączenie z visual
