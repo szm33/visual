@@ -7,18 +7,25 @@ namespace appVisual
     class Katalog
     {
         private string tytul;
-        private string opis;
+        private string autor;
         private int id;
+
+        public Katalog(string tytul, string autor, int id)
+        {
+            this.tytul = tytul;
+            this.autor = autor;
+            this.id = id;
+        }
 
         public string Tytul
         {
             get { return tytul; }
             set { tytul = value; }
         }
-        public string Opis
+        public string Autor
         {
-            get { return opis; }
-            set { opis = value; }
+            get { return autor; }
+            set { autor = value; }
         }
         public int Id
         {

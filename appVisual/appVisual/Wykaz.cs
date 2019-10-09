@@ -10,6 +10,13 @@ namespace appVisual
         private string nazwisko;
         private int nr;
 
+        public Wykaz(string imie, string nazwisko, int nr)
+        {
+            this.imie = imie;
+            this.nazwisko = nazwisko;
+            this.nr = nr;
+        }
+
         public string Imie
         {
             get{ return imie; }
