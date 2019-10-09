@@ -5,3 +5,5 @@
 /appVisual/.vs/appVisual/v16/Server/sqlite3/db.lock
 .vs
 /appVisual/.vs/appVisual/v16
+appVisual/appVisual/obj
+appVisual/appVisual/bin/
