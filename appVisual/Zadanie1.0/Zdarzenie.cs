@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace appVisual
+namespace Zadanie1._0
 {
     class Zdarzenie
     {
