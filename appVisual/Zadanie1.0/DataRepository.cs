@@ -10,6 +10,7 @@ namespace Zadanie1._0
     {
         private DataContext dane;
         private IDataFiller dataFiller;
+        private int nrTransakcji=int.MaxValue;
 
         public DataRepository(DataContext dane, IDataFiller dataFiller)
         {
@@ -117,7 +118,7 @@ namespace Zadanie1._0
         {
             return dane.opisy_ksiazek;
         }
-        public IEnumerable<Zdarzenie> GetZdarzenie()
+        public IEnumerable<Zdarzenie> GetAllZdarzenie()
         {
             return dane.zdarzenia;
         }
@@ -185,6 +186,12 @@ namespace Zadanie1._0
                     dane.zdarzenia.Insert(i, zdarzenie);
                 }
             }
+        }
+
+        public int GetNrTransakcji()
+        {
+            nrTransakcji--;
+            return nrTransakcji;
         }
 
     }
