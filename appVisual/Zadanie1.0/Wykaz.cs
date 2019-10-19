@@ -12,25 +12,19 @@ namespace Zadanie1._0
 
         public Wykaz(string imie, string nazwisko, int nr)
         {
-            this.imie = imie;
-            this.nazwisko = nazwisko;
-            this.nr = nr;
+            this.Imie = imie;
+            this.Nazwisko = nazwisko;
+            this.Nr = nr;
         }
 
-        public string Imie
+        public string Imie { get => imie; set => imie = value; }
+        public string Nazwisko { get => nazwisko; set => nazwisko = value; }
+        public int Nr { get => nr; set => nr = value; }
+
+        public override bool Equals(object obj)
         {
-            get{ return imie; }
-            set { imie = value; }
-        }
-        public string Nazwisko
-        {
-            get { return nazwisko; }
-            set { nazwisko = value; }
-        }
-        public int Nr
-        {
-            get { return nr; }
-            set { nr = value; }
+            return obj is Wykaz wykaz &&
+                   Nr == wykaz.Nr;
         }
     }
 }

@@ -32,5 +32,11 @@ namespace Zadanie1._0
             get { return id; }
             set { id = value; }
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Katalog katalog &&
+                   id == katalog.id;
+        }
     }
 }
