@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using System.Text;
 
 
 
 namespace Zadanie1._0
 {
-    class DataRepository
+    public class DataRepository
     {
         private DataContext dane;
         private IDataFiller dataFiller;
@@ -15,6 +17,10 @@ namespace Zadanie1._0
         {
             this.dane = dane;
             this.dataFiller = dataFiller;
+        }
+
+        public void FillRepositoryWithDataFiller()
+        {
             dataFiller.Fill(dane);
         }
         //kazdy czytelnik moze wystapic raz
@@ -26,12 +32,15 @@ namespace Zadanie1._0
             }
             
         }
-        //dana typ ksiazki moze wystapic raz
+        //dana typu ksiazki moze wystapic raz
+        //DO UZGODNIENIA! obecnie w Dictionary wartosc klucza zostaje inkrementowana z kazdym dodaniem elementu, rozpoczynajac od elementu 1(wczesniej 0!)
+        //remove odbywa sie poprzez podanie wartosciu klucza(byc moze lepiej podawac wartosc id ksiazki)
+        //obecnie getKatalog odbywa sie poprzez podanie id ksiazki
         public void AddKatalog(Katalog katalog)
         {
             if (!dane.ksiazki.ContainsValue(katalog))
             {
-                int key=dane.ksiazki.Count;
+                int key=dane.ksiazki.Count + 1;
                 while(dane.ksiazki.ContainsKey(key))
                 {
                     key++;
@@ -117,7 +126,7 @@ namespace Zadanie1._0
         {
             return dane.opisy_ksiazek;
         }
-        public IEnumerable<Zdarzenie> GetZdarzenie()
+        public IEnumerable<Zdarzenie> GetAllZdarzenie()
         {
             return dane.zdarzenia;
         }
@@ -152,26 +161,33 @@ namespace Zadanie1._0
             }
         }
         // aktualizacja ksiazki o danym identyfikatorze
+        // PROPOZYCJA!! zamiana klucza w slowniku na GUID i uzycie tego samego GUID w id ksiazki
+        // ulatwi to przeszukiwanie slownika
         public void UpdateKatalog(int id, Katalog nowaKsiazka)
         {
-            foreach (Katalog ksiazka in dane.ksiazki.Values)
-            {
-                if (ksiazka.Id == id)
-                {
-                    dane.ksiazki.Remove(ksiazka.Id);
-                    dane.ksiazki.Add(ksiazka.Id, nowaKsiazka);
-                    break;
-                }
-            }
+//            int elements = dane.ksiazki.Count - 1;
+//            for(int index = 0; index < elements; index++)
+//            {
+////                if (dane.ksiazki)
+////                {
+////                    int idDictionary = keyValuePair.Key;
+////                    dane.ksiazki.Remove(idDictionary);
+////                    AddKatalog(nowaKsiazka);
+////                }
+//            }
+
         }
         // aktualizacja opisu ksiazki o danym identyfikatorze
+        // DO UZGODNIENIA!!! OpisStanu nie zawiera w sobie zadnego identyfikatora, w tym przypadku odwolujemy sie do pozycji w kolecji
+        // byc moze lepiej dodac pole id w klasie OpisStanu
         public void UpdateOpisStanu(int id, OpisStanu opis)
         {
             for (int i = 0; i < dane.opisy_ksiazek.Count; i++)
             {
                 if(dane.opisy_ksiazek[i].Ksiazka.Id == id)
                 {
-                    dane.opisy_ksiazek.Insert(i, opis);
+                    dane.opisy_ksiazek[i] = opis;
+//                    dane.opisy_ksiazek.Insert(i, opis);
                 }
             }
         }
@@ -182,7 +198,8 @@ namespace Zadanie1._0
             {
                 if(dane.zdarzenia[i].NrTransakcji == nrTransakcji)
                 {
-                    dane.zdarzenia.Insert(i, zdarzenie);
+                    dane.zdarzenia[i] = zdarzenie;
+//                    dane.zdarzenia.Insert(i, zdarzenie);
                 }
             }
         }

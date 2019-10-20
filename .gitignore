@@ -5,5 +5,8 @@
 /appVisual/.vs/appVisual/v16/Server/sqlite3/db.lock
 .vs
 /appVisual/.vs/appVisual/v16
-appVisual/Zadanie1.0/obj
+appVisual/Zadanie1.0/obj/
 appVisual/Zadanie1.0/bin/
+appVisual/DataRepositoryTest/bin/
+appVisual/DataRepositoryTest/obj/
+appVisual/TestResults/

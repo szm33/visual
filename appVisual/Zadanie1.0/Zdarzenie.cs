@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    class Zdarzenie
+    public class Zdarzenie
     {
         int nrTransakcji;
         Wykaz wypozyczajacy;

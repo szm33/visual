@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    class Katalog
+    public class Katalog
     {
         private string tytul;
         private string autor;

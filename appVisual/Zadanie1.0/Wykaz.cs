@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    class Wykaz
+    public class Wykaz
     {
         private string imie;
         private string nazwisko;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    class OpisStanu
+    public class OpisStanu
     {
         Katalog ksiazka;
         double cena;

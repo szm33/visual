@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    class DataContext
+    public class DataContext
     {
         public List<Wykaz> czytelnicy;
         public Dictionary<int, Katalog> ksiazki;
