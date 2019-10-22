@@ -16,7 +16,7 @@ namespace DataRepositoryTest
             Wykaz czytelnik1 = new Wykaz("Maciej", "Bartos", 1);
             Katalog ksiazka1 = new Katalog("Wiedzmin", "Andrzej Sapkowski", 1);
             OpisStanu opisStanu1 = new OpisStanu(ksiazka1, 6, 15.30);
-            Zdarzenie zdarzenie1 = new Zdarzenie(czytelnik1, opisStanu1, DateTime.Now, 2, 1);
+            Zdarzenie zdarzenie1 = new Zdarzenie(czytelnik1, opisStanu1, DateTime.Now, 1);
             IDataFiller dataFiller = new WypelnianieStalymi(5);
 
             List<Wykaz> czytelnicyList = new List<Wykaz>();
@@ -79,7 +79,7 @@ namespace DataRepositoryTest
         {
             DataRepository dataRepository = CreateDataRepositoryExample();
 
-            Zdarzenie zdarzenie = new Zdarzenie(dataRepository.GetWykaz(1), dataRepository.GetOpisStanu(1), DateTime.Now, 2, 2);
+            Zdarzenie zdarzenie = new Zdarzenie(dataRepository.GetWykaz(1), dataRepository.GetOpisStanu(1), DateTime.Now, 2);
 
             dataRepository.AddZdarzenie(zdarzenie);
 
@@ -166,8 +166,8 @@ namespace DataRepositoryTest
             OpisStanu opisStanu = new OpisStanu(ksiazka, 23, 19.99);
 
 
-            Zdarzenie zdarzenie1 = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 10, 1);
-            Zdarzenie zdarzenie2 = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 8, 2);
+            Zdarzenie zdarzenie1 = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 1);
+            Zdarzenie zdarzenie2 = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 2);
 
             dataRepository.AddKatalog(ksiazka);
             dataRepository.AddWykaz(czytelnik);
@@ -229,7 +229,7 @@ namespace DataRepositoryTest
             Wykaz czytelnik = new Wykaz("FirstName", "LastName", 1);
             Katalog ksiazka = new Katalog("Name", "Author", 1);
             OpisStanu opisStanu = new OpisStanu(ksiazka, 15, 29.99);
-            Zdarzenie zdarzenie = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 4, 1);
+            Zdarzenie zdarzenie = new Zdarzenie(czytelnik, opisStanu, DateTime.Now, 1);
 
             dataRepository.AddWykaz(czytelnik);
             dataRepository.AddKatalog(ksiazka);
@@ -252,19 +252,20 @@ namespace DataRepositoryTest
             Assert.AreSame(czytelnik, dataRepository.GetWykaz(6));
         }
 
-        //PYTANIE!! Co powinno sie dziec z obiektem klasay OpisStanu lub Zdarzenie kiedy wykonujemy update obiektu katalog lub wykaz
         [TestMethod]
         public void UpdateKatalogTest()
         {
-//            DataRepository dataRepository = CreateDataRepositoryExample();
-//
-//            Katalog ksiazka = new Katalog("NameExample", "AuthorExample", 5);
-//
-//            dataRepository.UpdateKatalog(1, ksiazka);
+            DataRepository dataRepository = CreateDataRepositoryExample();
 
-            Assert.IsTrue(true);
-//            Assert.AreSame(ksiazka, dataRepository.GetWykaz(5));
+            Katalog ksiazka = new Katalog("NameExample", "AuthorExample", 5);
+
+            dataRepository.UpdateKatalog(1, ksiazka);
+
+            Assert.AreSame(ksiazka, dataRepository.GetKatalog(5));
+
+            Assert.IsNull(dataRepository.GetOpisStanu(1));
         }
+
 
         [TestMethod]
         public void UpdateOpisStanuTest()
@@ -281,12 +282,15 @@ namespace DataRepositoryTest
         public void UpdateZdarzenieTest()
         {
             DataRepository dataRepository = CreateDataRepositoryExample();
-            Zdarzenie zdarzenie = new Zdarzenie(dataRepository.GetWykaz(1), dataRepository.GetOpisStanu(1), DateTime.Now, 2, 1);
+            Zdarzenie zdarzenie = new Zdarzenie(dataRepository.GetWykaz(1), dataRepository.GetOpisStanu(1), DateTime.Now, 1);
 
             dataRepository.UpdateZdarzenie(1, zdarzenie);
 
             Assert.AreSame(zdarzenie, dataRepository.GetZdarzenie(1));
 
         }
+     
+
+    
     }
 }

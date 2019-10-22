@@ -40,12 +40,13 @@ namespace Zadanie1._0
         {
             if (!dane.ksiazki.ContainsValue(katalog))
             {
-                int key=dane.ksiazki.Count + 1;
+                /*int key=dane.ksiazki.Count + 1;
                 while(dane.ksiazki.ContainsKey(key))
                 {
                     key++;
                 }
-                dane.ksiazki.Add(key, katalog);
+                dane.ksiazki.Add(key, katalog);*/
+                dane.ksiazki.Add(katalog.Id, katalog);
             }
             
         }
@@ -134,10 +135,10 @@ namespace Zadanie1._0
         {
             dane.czytelnicy.Remove(czytelnik);
         }
-        //usuniecie ksiazki o podanym kluczu w kolekcji
-        public void RemoveKatalog(int klucz)
+        //usuniecie ksiazki o podanym identyfikatorze ktory jest rowny kluczowi w dictionary
+        public void RemoveKatalog(int id)
         {
-            dane.ksiazki.Remove(klucz);
+            dane.ksiazki.Remove(id);
         }
         public void RemoveOpisStanu(OpisStanu opis)
         {
@@ -165,21 +166,13 @@ namespace Zadanie1._0
         // ulatwi to przeszukiwanie slownika
         public void UpdateKatalog(int id, Katalog nowaKsiazka)
         {
-//            int elements = dane.ksiazki.Count - 1;
-//            for(int index = 0; index < elements; index++)
-//            {
-////                if (dane.ksiazki)
-////                {
-////                    int idDictionary = keyValuePair.Key;
-////                    dane.ksiazki.Remove(idDictionary);
-////                    AddKatalog(nowaKsiazka);
-////                }
-//            }
+
+            dane.ksiazki.Remove(id);
+            RemoveOpisStanu(GetOpisStanu(id));
+            dane.ksiazki.Add(nowaKsiazka.Id, nowaKsiazka);
 
         }
         // aktualizacja opisu ksiazki o danym identyfikatorze
-        // DO UZGODNIENIA!!! OpisStanu nie zawiera w sobie zadnego identyfikatora, w tym przypadku odwolujemy sie do pozycji w kolecji
-        // byc moze lepiej dodac pole id w klasie OpisStanu
         public void UpdateOpisStanu(int id, OpisStanu opis)
         {
             for (int i = 0; i < dane.opisy_ksiazek.Count; i++)
@@ -187,7 +180,6 @@ namespace Zadanie1._0
                 if(dane.opisy_ksiazek[i].Ksiazka.Id == id)
                 {
                     dane.opisy_ksiazek[i] = opis;
-//                    dane.opisy_ksiazek.Insert(i, opis);
                 }
             }
         }
@@ -199,7 +191,6 @@ namespace Zadanie1._0
                 if(dane.zdarzenia[i].NrTransakcji == nrTransakcji)
                 {
                     dane.zdarzenia[i] = zdarzenie;
-//                    dane.zdarzenia.Insert(i, zdarzenie);
                 }
             }
         }

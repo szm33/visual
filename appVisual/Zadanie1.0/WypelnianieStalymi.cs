@@ -22,7 +22,7 @@ namespace Zadanie1._0
                data.ksiazki.Add(i, new Katalog("książka" + i, "autor" + i, i));
                data.czytelnicy.Add(new Wykaz("imię" + i, "nazwisko" + i, i));
                data.opisy_ksiazek.Add(new OpisStanu(data.ksiazki[i], i + 1, i + 0.5));
-               data.zdarzenia.Add(new Zdarzenie(data.czytelnicy[i], data.opisy_ksiazek[i], new DateTime(),ilosc-i,i));
+               data.zdarzenia.Add(new Zdarzenie(data.czytelnicy[i], data.opisy_ksiazek[i], new DateTime(),i));
            }
             
 
