@@ -12,6 +12,7 @@ namespace Zadanie1._0
     {
         private DataContext dane;
         private IDataFiller dataFiller;
+        private int nrTransakcji=int.MaxValue;
 
         public DataRepository(DataContext dane, IDataFiller dataFiller)
         {
@@ -193,6 +194,12 @@ namespace Zadanie1._0
                     dane.zdarzenia[i] = zdarzenie;
                 }
             }
+        }
+
+        public int GetNrTransakcji()
+        {
+            nrTransakcji--;
+            return nrTransakcji;
         }
 
     }
