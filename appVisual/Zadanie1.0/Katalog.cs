@@ -8,13 +8,13 @@ namespace Zadanie1._0
     {
         private string tytul;
         private string autor;
-        private int id;
+        private int idKsiazki;
 
-        public Katalog(string tytul, string autor, int id)
+        public Katalog(string tytul, string autor, int idKsiazki)
         {
             this.tytul = tytul;
             this.autor = autor;
-            this.id = id;
+            this.idKsiazki = idKsiazki;
         }
 
         public string Tytul
@@ -27,16 +27,21 @@ namespace Zadanie1._0
             get { return autor; }
             set { autor = value; }
         }
-        public int Id
+        public int IdKsiazki
         {
-            get { return id; }
-            set { id = value; }
+            get { return idKsiazki; }
+            set { idKsiazki = value; }
         }
 
         public override bool Equals(object obj)
         {
             return obj is Katalog katalog &&
-                   id == katalog.id;
+                   idKsiazki == katalog.idKsiazki;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Tytul)}: {Tytul}, {nameof(Autor)}: {Autor}, {nameof(IdKsiazki)}: {IdKsiazki}";
         }
     }
 }

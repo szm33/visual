@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DostawaZdarzenie.cs" />
+    <Compile Include="KupienieKsiazkiZdarzenie.cs" />
+    <Compile Include="DodanieKsiazkiZdarzenie.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DateService.cs" />
