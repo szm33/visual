@@ -19,5 +19,13 @@ namespace Zadanie1._0
             this.zdarzenia = zdarzenia;
             this.opisy_ksiazek = opisy_ksiazek;
         }
+
+        public DataContext()
+        {
+            this.czytelnicy = new List<Wykaz>();
+            this.ksiazki = new Dictionary<int, Katalog>();
+            this.zdarzenia = new ObservableCollection<Zdarzenie>();
+            this.opisy_ksiazek = new List<OpisStanu>();
+        }
     }
 }

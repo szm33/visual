@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Dynamic;
 using System.Linq;
@@ -9,16 +10,26 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    public class DataRepository
+    public class DataRepository: IDataRepository
     {
         private DataContext dane;
         private IDataFiller dataFiller;
         private int nrTransakcji = 1;
 
+        public event EventHandler ZdarzenieDodane;
+
         public DataRepository(DataContext dane, IDataFiller dataFiller)
         {
             this.dane = dane;
             this.dataFiller = dataFiller;
+        }
+
+        private void DodanieDoZdarzenia(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                ZdarzenieDodane(sender, e);
+            }
         }
 
         public IEnumerable<Zdarzenie> GetAllZdarzeniaCzytelnika(int nrOsoby)
@@ -53,20 +64,18 @@ namespace Zadanie1._0
         {
             dataFiller.Fill(dane);
         }
+
         //kazdy czytelnik moze wystapic raz
         public void AddWykaz(String imie, String nazwisko, int nrOsoby)
         {
             
-            if (dane.czytelnicy.FindIndex(i => i.Nr == nrOsoby) == -1)
+            if (!dane.czytelnicy.Exists(i => i.Nr == nrOsoby))
             {
                 dane.czytelnicy.Add(new Wykaz(imie, nazwisko, nrOsoby));
             }
             
         }
         //dana typu ksiazki moze wystapic raz
-        //DO UZGODNIENIA! obecnie w Dictionary wartosc klucza zostaje inkrementowana z kazdym dodaniem elementu, rozpoczynajac od elementu 1(wczesniej 0!)
-        //remove odbywa sie poprzez podanie wartosciu klucza(byc moze lepiej podawac wartosc idKsiazki ksiazki)
-        //obecnie getKatalog odbywa sie poprzez podanie idKsiazki ksiazki
         public void AddKatalog(String tytul, String autor, int idKsiazki)
         {
             if (!dane.ksiazki.ContainsKey(idKsiazki))
@@ -78,7 +87,7 @@ namespace Zadanie1._0
         // opis stanu do danej ksiazki moze byc tylko jeden
         public void AddOpisStanu(double cena, int ilosc, int idKsiazki)
         {
-            if(dane.opisy_ksiazek.FindIndex(i => i.Ksiazka.IdKsiazki == idKsiazki) == -1)
+            if(!dane.opisy_ksiazek.Exists(i => i.Ksiazka.IdKsiazki == idKsiazki))
             {
                 dane.opisy_ksiazek.Add(new OpisStanu(GetKatalog(idKsiazki), ilosc, cena));
             }
@@ -100,6 +109,7 @@ namespace Zadanie1._0
         {
             return new KupienieKsiazkiZdarzenie(osoba, opisStanu, dateTime, GetNrTransakcji());
         }
+
         //kupno danej ksiazki przez danego cztelnika moze wystapic wiele razy 
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
@@ -195,8 +205,6 @@ namespace Zadanie1._0
         }
 
         // aktualizacja ksiazki o danym identyfikatorze
-        // PROPOZYCJA!! zamiana klucza w slowniku na GUID i uzycie tego samego GUID w idKsiazki ksiazki
-        // ulatwi to przeszukiwanie slownika
         public void UpdateKatalog(String tytul, String autor, int idKsiazki)
         {
             RemoveKatalog(idKsiazki);

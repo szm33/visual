@@ -8,9 +8,9 @@ namespace Zadanie1._0
 {
      class DateService
     {
-        private DataRepository repo;
+        private IDataRepository repo;
 
-        public DateService(DataRepository repo)
+        public DateService(IDataRepository repo)
         {
             this.repo = repo;
         }
