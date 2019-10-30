@@ -8,7 +8,7 @@ using Zadanie1._0;
 namespace DataRepositoryTest
 {
     [TestClass]
-    public class UnitTest1
+    public class DataRepositoryTest
     {
 
         public DataRepository CreateDataRepositoryExample()
