@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -10,13 +8,11 @@ using System.Text;
 
 namespace Zadanie1._0
 {
-    public class DataRepository: IDataRepository
+    public class DataRepository
     {
         private DataContext dane;
         private IDataFiller dataFiller;
-        private int nrTransakcji = 1;
-
-        public event EventHandler ZdarzenieDodane;
+        private int nrTransakcji=int.MaxValue;
 
         public DataRepository(DataContext dane, IDataFiller dataFiller)
         {
@@ -24,103 +20,59 @@ namespace Zadanie1._0
             this.dataFiller = dataFiller;
         }
 
-        private void DodanieDoZdarzenia(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                ZdarzenieDodane(sender, e);
-            }
-        }
-
-        public IEnumerable<Zdarzenie> GetAllZdarzeniaCzytelnika(int nrOsoby)
-        {
-            List<Zdarzenie> zdarzeniaOsoby = new List<Zdarzenie>();
-            foreach (Zdarzenie zdarzenie in GetAllZdarzenie())
-            {
-                if (zdarzenie.Wypozyczajacy.Nr == nrOsoby)
-                {
-                    zdarzeniaOsoby.Add(zdarzenie);
-                }
-            }
-
-            return zdarzeniaOsoby;
-        }
-
-        public IEnumerable<Katalog> GetAllKsiazkiAutora(String autor)
-        {
-            List<Katalog> ksiazki = new List<Katalog>();
-            foreach (Katalog ksiazka in GetAllKatalog())
-            {
-                if (ksiazka.Autor == autor)
-                {
-                    ksiazki.Add(ksiazka);
-                }
-            }
-
-            return ksiazki;
-        }
-
         public void FillRepositoryWithDataFiller()
         {
             dataFiller.Fill(dane);
         }
-
         //kazdy czytelnik moze wystapic raz
-        public void AddWykaz(String imie, String nazwisko, int nrOsoby)
+        public void AddWykaz(Wykaz wykaz)
         {
-            
-            if (!dane.czytelnicy.Exists(i => i.Nr == nrOsoby))
+            if (!dane.czytelnicy.Contains(wykaz))
             {
-                dane.czytelnicy.Add(new Wykaz(imie, nazwisko, nrOsoby));
+                dane.czytelnicy.Add(wykaz);
             }
             
         }
         //dana typu ksiazki moze wystapic raz
-        public void AddKatalog(String tytul, String autor, int idKsiazki)
+        //DO UZGODNIENIA! obecnie w Dictionary wartosc klucza zostaje inkrementowana z kazdym dodaniem elementu, rozpoczynajac od elementu 1(wczesniej 0!)
+        //remove odbywa sie poprzez podanie wartosciu klucza(byc moze lepiej podawac wartosc id ksiazki)
+        //obecnie getKatalog odbywa sie poprzez podanie id ksiazki
+        public void AddKatalog(Katalog katalog)
         {
-            if (!dane.ksiazki.ContainsKey(idKsiazki))
+            if (!dane.ksiazki.ContainsValue(katalog))
             {
-                dane.ksiazki.Add(idKsiazki, new Katalog(tytul, autor, idKsiazki));
+                /*int key=dane.ksiazki.Count + 1;
+                while(dane.ksiazki.ContainsKey(key))
+                {
+                    key++;
+                }
+                dane.ksiazki.Add(key, katalog);*/
+                dane.ksiazki.Add(katalog.Id, katalog);
             }
             
         }
         // opis stanu do danej ksiazki moze byc tylko jeden
-        public void AddOpisStanu(double cena, int ilosc, int idKsiazki)
+        public void AddOpisStanu(OpisStanu opis)
         {
-            if(!dane.opisy_ksiazek.Exists(i => i.Ksiazka.IdKsiazki == idKsiazki))
+            if(!dane.opisy_ksiazek.Contains(opis) && dane.ksiazki.ContainsValue(opis.Ksiazka))
             {
-                dane.opisy_ksiazek.Add(new OpisStanu(GetKatalog(idKsiazki), ilosc, cena));
+                dane.opisy_ksiazek.Add(opis);
             }
         }
-
-        public Zdarzenie CreateDodanieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu,
-            DateTime dateTime)
-        {
-            return new DodanieKsiazkiZdarzenie(osoba, opisStanu, dateTime, GetNrTransakcji());
-        }
-
-        public Zdarzenie CreateDostawaZdarzenie(Wykaz osoba, OpisStanu opisStanu, DateTime dateTime)
-        {
-            return  new DostawaZdarzenie(osoba, opisStanu, dateTime, GetNrTransakcji());
-        }
-
-        public Zdarzenie CreateKupienieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu,
-            DateTime dateTime)
-        {
-            return new KupienieKsiazkiZdarzenie(osoba, opisStanu, dateTime, GetNrTransakcji());
-        }
-
         //kupno danej ksiazki przez danego cztelnika moze wystapic wiele razy 
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
-            dane.zdarzenia.Add(zdarzenie);
+            if (dane.opisy_ksiazek.Contains(zdarzenie.OpisKsiazki) && dane.czytelnicy.Contains(zdarzenie.Wypozyczajacy))
+            {
+                dane.zdarzenia.Add(zdarzenie);
+            }
         }
-        //zwracamy czytelnika o danym numerze(nrOsoby jest unikalny)
-        public Wykaz GetWykaz(int nrOsoby)
+        //zwracamy czytelnika o danym numerze(nr jest unikalny)
+        public Wykaz GetWykaz(int nr)
         {
             foreach(Wykaz czytelnik in dane.czytelnicy)
             {
-                if (czytelnik.Nr == nrOsoby)
+                if (czytelnik.Nr == nr)
                 {
                     return czytelnik;
                 }
@@ -128,11 +80,11 @@ namespace Zadanie1._0
             return null;
         }
         //zwracamy ksiazke o danym identyfikatorze
-        public Katalog GetKatalog(int idKsiazki)
+        public Katalog GetKatalog(int id)
         {
             foreach (Katalog ksiazka in dane.ksiazki.Values)
             {
-                if (ksiazka.IdKsiazki == idKsiazki)
+                if (ksiazka.Id == id)
                 {
                     return ksiazka;
                 }
@@ -140,11 +92,11 @@ namespace Zadanie1._0
             return null;
         }
         //zwracamy opis ksiazki o danym identyfikatorze
-        public OpisStanu GetOpisStanu(int idKsiazki)
+        public OpisStanu GetOpisStanu(int id)
         {
             foreach (OpisStanu opis in dane.opisy_ksiazek)
             {
-                if (opis.Ksiazka.IdKsiazki == idKsiazki)
+                if (opis.Ksiazka.Id == id)
                 {
                     return opis;
                 }
@@ -185,9 +137,9 @@ namespace Zadanie1._0
             dane.czytelnicy.Remove(czytelnik);
         }
         //usuniecie ksiazki o podanym identyfikatorze ktory jest rowny kluczowi w dictionary
-        public void RemoveKatalog(int idKsiazki)
+        public void RemoveKatalog(int id)
         {
-            dane.ksiazki.Remove(idKsiazki);
+            dane.ksiazki.Remove(id);
         }
         public void RemoveOpisStanu(OpisStanu opis)
         {
@@ -198,26 +150,39 @@ namespace Zadanie1._0
             dane.zdarzenia.Remove(zdarzenie);
         }
         // aktualizacja czytelnika o danym numerze
-        public void UpdateWykaz(int nrOsoby, String imie, String nazwisko)
+        public void UpdateWykaz(int nr, Wykaz czytelnik)
         {
-            RemoveWykaz(GetWykaz(nrOsoby));
-            AddWykaz(imie, nazwisko, nrOsoby);
-        }
 
+            for (int i = 0; i < dane.czytelnicy.Count; i++)
+            {
+                if (dane.czytelnicy[i].Nr == nr)
+                {
+                    dane.czytelnicy.Insert(i, czytelnik);
+                    break;
+                }
+            }
+        }
         // aktualizacja ksiazki o danym identyfikatorze
-        public void UpdateKatalog(String tytul, String autor, int idKsiazki)
+        // PROPOZYCJA!! zamiana klucza w slowniku na GUID i uzycie tego samego GUID w id ksiazki
+        // ulatwi to przeszukiwanie slownika
+        public void UpdateKatalog(int id, Katalog nowaKsiazka)
         {
-            RemoveKatalog(idKsiazki);
-            RemoveOpisStanu(GetOpisStanu(idKsiazki));
-            AddKatalog(tytul, autor, idKsiazki);
+
+            dane.ksiazki.Remove(id);
+            RemoveOpisStanu(GetOpisStanu(id));
+            dane.ksiazki.Add(nowaKsiazka.Id, nowaKsiazka);
 
         }
         // aktualizacja opisu ksiazki o danym identyfikatorze
-        public void UpdateOpisStanu(int idKsiazki, double cena, int ilosc)
+        public void UpdateOpisStanu(int id, OpisStanu opis)
         {
-            RemoveOpisStanu(GetOpisStanu(idKsiazki));
-            AddOpisStanu(cena, ilosc, idKsiazki);
-
+            for (int i = 0; i < dane.opisy_ksiazek.Count; i++)
+            {
+                if(dane.opisy_ksiazek[i].Ksiazka.Id == id)
+                {
+                    dane.opisy_ksiazek[i] = opis;
+                }
+            }
         }
         // aktualizacja transakcji o danym numerze transakcji
         public void UpdateZdarzenie(int nrTransakcji, Zdarzenie zdarzenie)
@@ -233,7 +198,7 @@ namespace Zadanie1._0
 
         public int GetNrTransakcji()
         {
-            nrTransakcji++;
+            nrTransakcji--;
             return nrTransakcji;
         }
 

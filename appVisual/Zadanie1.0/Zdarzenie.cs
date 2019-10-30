@@ -7,13 +7,13 @@ namespace Zadanie1._0
     public class Zdarzenie
     {
         int nrTransakcji;
-        Wykaz osoba;
+        Wykaz wypozyczajacy;
         OpisStanu opisKsiazki;
         DateTime data_zakupu;
 
-        public Zdarzenie(Wykaz osoba, OpisStanu opisKsiazki, DateTime data_zakupu, int nrTransakcji)
+        public Zdarzenie(Wykaz wypozyczajacy, OpisStanu opisKsiazki, DateTime data_zakupu, int nrTransakcji)
         {
-            this.osoba = osoba;
+            this.wypozyczajacy = wypozyczajacy;
             this.opisKsiazki = opisKsiazki;
             this.data_zakupu = data_zakupu;
             this.NrTransakcji = nrTransakcji;
@@ -21,12 +21,7 @@ namespace Zadanie1._0
 
         public DateTime Data_zakupu { get => data_zakupu; set => data_zakupu = value; }
         public int NrTransakcji { get => nrTransakcji; set => nrTransakcji = value; }
-        internal Wykaz Wypozyczajacy { get => osoba; set => osoba = value; }
+        internal Wykaz Wypozyczajacy { get => wypozyczajacy; set => wypozyczajacy = value; }
         internal OpisStanu OpisKsiazki { get => opisKsiazki; set => opisKsiazki = value; }
-
-        public override string ToString()
-        {
-            return $"{nameof(nrTransakcji)}: {nrTransakcji}, {nameof(osoba)}: {osoba}, {nameof(opisKsiazki)}: {opisKsiazki}, {nameof(data_zakupu)}: {data_zakupu}";
-        }
     }
 }
