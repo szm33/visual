@@ -8,21 +8,16 @@ namespace Zadanie1._0
 {
     public interface IDataRepository
     {
-        IEnumerable<Zdarzenie> GetAllZdarzeniaCzytelnika(int nrOsoby);
-        IEnumerable<Katalog> GetAllKsiazkiAutora(String autor);
         void FillRepositoryWithDataFiller();
-        void AddWykaz(String imie, String nazwisko, int nrOsoby);
-        void AddKatalog(String tytul, String autor, int idKsiazki);
-        void AddOpisStanu(double cena, int ilosc, int idKsiazki);
-
-        Zdarzenie CreateDodanieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu,
-            DateTime dateTime);
-
-        Zdarzenie CreateDostawaZdarzenie(Wykaz osoba, OpisStanu opisStanu, DateTime dateTime);
-
-        Zdarzenie CreateKupienieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu,
-            DateTime dateTime);
-
+        Wykaz CreateWykaz(string imie, string nazwisko, int nr);
+        Katalog CreatKatalog(string tytul, string autor, int id);
+        OpisStanu CreateOpisStanu(Katalog ksiazka, int ilosc, double cena);
+        DostawaZdarzenie CreateDostawaZdarzenie(Wykaz osoba, OpisStanu opisStanu, DateTime data);
+        DodanieKsiazkiZdarzenie CreateDodanieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu, DateTime data);
+        KupienieKsiazkiZdarzenie CreateKupienieKsiazkiZdarzenie(Wykaz osoba, OpisStanu opisStanu, DateTime data);
+        void AddWykaz(Wykaz wykaz);
+        void AddKatalog(Katalog katalog);
+        void AddOpisStanu(OpisStanu opis);
         void AddZdarzenie(Zdarzenie zdarzenie);
         Wykaz GetWykaz(int nrOsoby);
         Katalog GetKatalog(int idKsiazki);
@@ -33,14 +28,14 @@ namespace Zadanie1._0
         IEnumerable<OpisStanu> GetAllOpisStanu();
         IEnumerable<Zdarzenie> GetAllZdarzenie();
         void RemoveWykaz(Wykaz czytelnik);
-        void RemoveKatalog(int idKsiazki);
+        void RemoveKatalog(int id);
         void RemoveOpisStanu(OpisStanu opis);
         void RemoveZdarzenie(Zdarzenie zdarzenie);
-        void UpdateWykaz(int nrOsoby, String imie, String nazwisko);
-        void UpdateKatalog(String tytul, String autor, int idKsiazki);
-        void UpdateOpisStanu(int idKsiazki, double cena, int ilosc);
+        void UpdateWykaz(int nrOsoby, Wykaz osoba);
+        void UpdateKatalog(int idKsiazki, Katalog nowaKsiazka);
+        void UpdateOpisStanu(int idKsiazki, OpisStanu opis);
         void UpdateZdarzenie(int nrTransakcji, Zdarzenie zdarzenie);
-
+        int GetNrTransakcji();
 
     }
 }

@@ -13,9 +13,9 @@ namespace Zadanie1._0
         public OpisStanu(Katalog ksiazka, int ilosc, double cena)
         {
             this.ksiazka = ksiazka;
-            this.cena = cena;
             this.ilosc = ilosc;
-            
+            this.cena = cena;
+
         }
 
         public int Ilosc { get => ilosc; set => ilosc = value; }
@@ -27,11 +27,6 @@ namespace Zadanie1._0
         {
             return obj is OpisStanu stanu &&
                    ksiazka == stanu.ksiazka;
-        }
-
-        public override string ToString()
-        {
-            return $"{nameof(ksiazka)}: {ksiazka}, {nameof(cena)}: {cena}, {nameof(ilosc)}: {ilosc}";
         }
     }
 }

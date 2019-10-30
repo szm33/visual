@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Zadanie1._0
 {
-     class DateService
+     public class DateService
     {
         private IDataRepository repo;
 
@@ -20,64 +21,59 @@ namespace Zadanie1._0
             return repo.GetAllOpisStanu();
         }
 
-        public String TransakcjeCzytelnika(int nrOsoby)
+        public IEnumerable<Zdarzenie> TransakcjeCzytelnika(Wykaz czytelnik)
         {
-            return repo.GetAllZdarzeniaCzytelnika(nrOsoby).ToString();
+            List<Zdarzenie> zdarzenia = new List<Zdarzenie>();
+            foreach ( Zdarzenie zdarzenie in repo.GetAllZdarzenie())
+            {
+                if(Equals(zdarzenie.Wypozyczajacy, czytelnik))
+                {
+                    zdarzenia.Add(zdarzenie);
+                }
+            }
+            return zdarzenia;
         }
-        public void KupKsiazke(int nrOsoby, int idKsiazki, int ile)
+        public void KupienieKsiazki(int nrOsoby, int idKsiazki, int ile)
         {
             int iloscKsiazek = repo.GetOpisStanu(idKsiazki).Ilosc;
             double cenaKsiazki = repo.GetOpisStanu(idKsiazki).Cena;
             if (iloscKsiazek >= ile)
             {
-                repo.UpdateOpisStanu(idKsiazki, cenaKsiazki, iloscKsiazek);
-                repo.AddZdarzenie(repo.CreateKupienieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.GetOpisStanu(idKsiazki), DateTime.Now));
+                repo.UpdateOpisStanu(idKsiazki, repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscKsiazek - ile, cenaKsiazki));
+                repo.AddZdarzenie(repo.CreateKupienieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscKsiazek - ile, cenaKsiazki), DateTime.Now));
             }
-
         }
         public void DodanieKsiazki(int nrOsoby, int idKsiazki, String tytul, String autor)
         {
             if (repo.GetKatalog(idKsiazki) == null)
             {
-                repo.AddKatalog(tytul, autor, idKsiazki);
-                repo.AddOpisStanu(0.0, 0, idKsiazki);
-                repo.AddZdarzenie(repo.CreateDodanieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.GetOpisStanu(idKsiazki), DateTime.Now));
+                repo.AddKatalog(repo.CreatKatalog(tytul, autor, idKsiazki));
+                repo.AddOpisStanu(repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), 0, 0.0));
+                repo.AddZdarzenie(repo.CreateDodanieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), 0, 0.0), DateTime.Now));
             }
-
         }
 
-        public void DostawaKsiazki(int nrOsoby, int idKsiazki, int ilosc, int cena)
+        public void DostawaKsiazki(int nrOsoby, int idKsiazki, int ilosc, double cena)
         {
             if (repo.GetKatalog(idKsiazki) != null)
             {
-                repo.UpdateOpisStanu(idKsiazki, cena, ilosc);
-                repo.AddZdarzenie(repo.CreateDostawaZdarzenie(repo.GetWykaz(nrOsoby), repo.GetOpisStanu(idKsiazki), DateTime.Now));
+                int iloscObecna = repo.GetOpisStanu(idKsiazki).Ilosc;
+                repo.UpdateOpisStanu(idKsiazki, repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscObecna + ilosc, cena));
+                repo.AddZdarzenie(repo.CreateDostawaZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscObecna + ilosc, cena), DateTime.Now));
             }
         }
-
-        public String InformationAboutWykaz(int nrOsoby)
+        public IEnumerable<OpisStanu> KsiazkiAutora(string autor)
         {
-            return repo.GetWykaz(nrOsoby).ToString();
+            List<OpisStanu> ksiazki = new List<OpisStanu>();
+            foreach (OpisStanu opisy in repo.GetAllOpisStanu())
+            {
+                if(opisy.Ksiazka.Autor == autor)
+                {
+                    ksiazki.Add(opisy);
+                }
+            }
+            return ksiazki;
         }
 
-        public String InformationAboutKatalog(int idKsiazki)
-        {
-            return repo.GetKatalog(idKsiazki).ToString();
-        }
-
-        public String InformationAboutOpisStanu(int idKsiazki)
-        {
-            return repo.GetOpisStanu(idKsiazki).ToString();
-        }
-
-        public String InformationAboutZdarzenie(int nrTransakcji)
-        {
-            return repo.GetZdarzenie(nrTransakcji).ToString();
-        }
-
-        public string KsiazkiAutora(string autor)
-        {
-            return repo.GetAllKsiazkiAutora(autor).ToString();
-        }
     }
 }
