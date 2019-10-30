@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1._0
 {
-    class WypelnianieLosowe : IDataFiller
+    public class WypelnianieLosowe : IDataFiller
     {
         private int liczbaDanych;
         public WypelnianieLosowe(int liczbaDanych)

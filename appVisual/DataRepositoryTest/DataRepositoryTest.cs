@@ -49,6 +49,18 @@ namespace DataRepositoryTest
             return new DataRepository(dataContext, dataFiller);
         }
 
+        public DataRepository CreateEmptyRepositoryWithRandomFill()
+        {
+            List<Wykaz> czytelnicyList = new List<Wykaz>();
+            List<OpisStanu> opisStanuList = new List<OpisStanu>();
+            Dictionary<int, Katalog> ksiazkiDictionary = new Dictionary<int, Katalog>();
+            ObservableCollection<Zdarzenie> zdarzeniaCollection = new ObservableCollection<Zdarzenie>();
+            DataContext dataContext = new DataContext(czytelnicyList, ksiazkiDictionary, zdarzeniaCollection, opisStanuList);
+            IDataFiller dataFiller = new WypelnianieLosowe(5);
+
+            return new DataRepository(dataContext, dataFiller);
+        }
+
         [TestMethod]
         public void AddAndGetKatalogTest()
         {
@@ -289,8 +301,24 @@ namespace DataRepositoryTest
             Assert.AreSame(zdarzenie, dataRepository.GetZdarzenie(1));
 
         }
-     
 
-    
+        [TestMethod]
+        public void WypelnianieLosoweTest()
+        {
+            DataRepository dataRepository = CreateEmptyRepositoryWithRandomFill();
+            dataRepository.FillRepositoryWithDataFiller();
+            Assert.IsTrue(dataRepository.GetAllKatalog().ToList().Count == 5);
+            Assert.IsTrue(dataRepository.GetAllWykaz().ToList().Count == 5);
+            Assert.IsTrue(dataRepository.GetAllZdarzenie().ToList().Count == 5);
+            Assert.IsTrue(dataRepository.GetAllOpisStanu().ToList().Count == 5);
+            for (int i = 0; i < 5; i++)
+            {
+                Assert.IsTrue(dataRepository.GetAllOpisStanu().ToList()[i].Ilosc <= 100);
+            }
+            
+        }
+
+
+
     }
 }

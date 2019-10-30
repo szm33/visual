@@ -165,6 +165,13 @@ namespace Zadanie1._0
 
         public void RemoveKatalog(int id)
         {
+            foreach (OpisStanu opis in dane.opisy_ksiazek)
+            {
+                if(opis.Ksiazka.Id == id)
+                {
+                    dane.opisy_ksiazek.Remove(opis);
+                }
+            }
             dane.ksiazki.Remove(id);
         }
         public void RemoveOpisStanu(OpisStanu opis)
