@@ -26,5 +26,10 @@ namespace Zadanie1._0
             return obj is Wykaz wykaz &&
                    Nr == wykaz.Nr;
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(imie)}: {imie}, {nameof(nazwisko)}: {nazwisko}, {nameof(nr)}: {nr}";
+        }
     }
 }

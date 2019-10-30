@@ -28,5 +28,10 @@ namespace Zadanie1._0
             return obj is OpisStanu stanu &&
                    ksiazka == stanu.ksiazka;
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(ksiazka)}: {ksiazka.ToString()}, {nameof(cena)}: {cena}, {nameof(ilosc)}: {ilosc}";
+        }
     }
 }

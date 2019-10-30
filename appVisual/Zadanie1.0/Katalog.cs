@@ -38,5 +38,10 @@ namespace Zadanie1._0
             return obj is Katalog katalog &&
                    id == katalog.id;
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(tytul)}: {tytul}, {nameof(autor)}: {autor}, {nameof(id)}: {id}";
+        }
     }
 }

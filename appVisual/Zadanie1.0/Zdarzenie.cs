@@ -23,5 +23,10 @@ namespace Zadanie1._0
         public int NrTransakcji { get => nrTransakcji; set => nrTransakcji = value; }
         internal Wykaz Wypozyczajacy { get => osoba; set => osoba = value; }
         internal OpisStanu OpisKsiazki { get => opisKsiazki; set => opisKsiazki = value; }
+
+        public override string ToString()
+        {
+            return $"{nameof(nrTransakcji)}: {nrTransakcji}, {nameof(osoba)}: {osoba.ToString()}, {nameof(opisKsiazki)}: {opisKsiazki.ToString()}, {nameof(data_zakupu)}: {data_zakupu}";
+        }
     }
 }
