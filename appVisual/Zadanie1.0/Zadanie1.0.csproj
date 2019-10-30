@@ -44,8 +44,12 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DateService.cs" />
+    <Compile Include="DodanieKsiazkiZdarzenie.cs" />
+    <Compile Include="DostawaZdarzenie.cs" />
     <Compile Include="IDataFiller.cs" />
+    <Compile Include="IDataRepository.cs" />
     <Compile Include="Katalog.cs" />
+    <Compile Include="KupienieKsiazkiZdarzenie.cs" />
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wykaz.cs" />
