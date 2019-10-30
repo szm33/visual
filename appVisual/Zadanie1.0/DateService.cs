@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace Zadanie1._0
      class DateService
     {
         private IDataRepository repo;
+
+        private int DataServiceOpperations { get; set; }
 
         public DateService(IDataRepository repo)
         {
@@ -73,5 +76,6 @@ namespace Zadanie1._0
             }
             return ksiazki;
         }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Dynamic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Zadanie1._0
         {
             this.dane = dane;
             this.dataFiller = dataFiller;
+
+            dane.zdarzenia.CollectionChanged += OnZdarzenieAdded;
         }
 
         public void FillRepositoryWithDataFiller()
@@ -204,6 +207,10 @@ namespace Zadanie1._0
             return idTransakcji;
         }
 
+        public void OnZdarzenieAdded(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Console.WriteLine("Zdarzenie dodane!");
+        }
     }
     
 }
