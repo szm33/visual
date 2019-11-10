@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1._0;
+using zadanie2;
 
 namespace DataRepositoryTest
 {
@@ -76,6 +77,26 @@ namespace DataRepositoryTest
 
             Assert.AreEqual(futurePrice, dateRepository.GetOpisStanu(1).Cena);
             Assert.AreEqual(currentAmount + 10, dateRepository.GetOpisStanu(1).Ilosc);
+
+        }
+        [TestMethod]
+        public void serizlizacja()
+        {
+            Katalog k1 = new Katalog("tytul", "autor", 1);
+            Katalog k2 = new Katalog("tytul2", "autor2", 2);
+            List<Katalog> kata = new List<Katalog>();
+            kata.Add(k1);
+            kata.Add(k2);
+            string path = "katalogi.bin";
+            SerialClass<Katalog>.Serialize(path, k1);
+            Katalog k3 = SerialClass<Katalog>.Deserialize(path); 
+            Assert.AreEqual(k3, k1);
+            SerialClass<List<Katalog>>.Serialize(path, kata);
+            List < Katalog > kata1= SerialClass<List<Katalog>>.Deserialize(path);
+            for (int i = 0; i < kata.Count; i++)
+            {
+                Assert.AreEqual(kata[i], kata1[i]);
+            }
 
         }
     }

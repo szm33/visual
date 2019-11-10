@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
+    [Serializable]
     public class Wykaz
     {
         private string imie;
@@ -15,6 +16,11 @@ namespace Zadanie1._0
             this.Imie = imie;
             this.Nazwisko = nazwisko;
             this.Nr = nr;
+        }
+
+        public string Info()
+        {
+            return imie + ',' + nazwisko + ',' + nr;
         }
 
         public string Imie { get => imie; set => imie = value; }
@@ -29,7 +35,8 @@ namespace Zadanie1._0
 
         public override string ToString()
         {
-            return $"{nameof(imie)}: {imie}, {nameof(nazwisko)}: {nazwisko}, {nameof(nr)}: {nr}";
+            return imie + ',' + nazwisko + ',' + nr;
+            //return $"{nameof(imie)}: {imie}, {nameof(nazwisko)}: {nazwisko}, {nameof(nr)}: {nr}";
         }
     }
 }

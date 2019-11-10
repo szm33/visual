@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
+    [Serializable]
     public class Zdarzenie
     {
         int nrTransakcji;
@@ -19,6 +20,11 @@ namespace Zadanie1._0
             this.NrTransakcji = nrTransakcji;
         }
 
+        public string Info()
+        {
+            return osoba.Info() + ',' + opisKsiazki.Info() + ',' + data_zakupu.Year + ',' + data_zakupu.Month + ',' + data_zakupu.Day + ',' + nrTransakcji;
+        }
+
         public DateTime Data_zakupu { get => data_zakupu; set => data_zakupu = value; }
         public int NrTransakcji { get => nrTransakcji; set => nrTransakcji = value; }
         internal Wykaz Wypozyczajacy { get => osoba; set => osoba = value; }
@@ -26,7 +32,9 @@ namespace Zadanie1._0
 
         public override string ToString()
         {
-            return $"{nameof(nrTransakcji)}: {nrTransakcji}, {nameof(osoba)}: {osoba.ToString()}, {nameof(opisKsiazki)}: {opisKsiazki.ToString()}, {nameof(data_zakupu)}: {data_zakupu}";
+            return osoba.ToString() + ',' + opisKsiazki.ToString() + ',' + data_zakupu.Year + ',' + data_zakupu.Month + ',' + data_zakupu.Day + ',' + nrTransakcji;
+
+            //return $"{nameof(nrTransakcji)}: {nrTransakcji}, {nameof(osoba)}: {osoba.ToString()}, {nameof(opisKsiazki)}: {opisKsiazki.ToString()}, {nameof(data_zakupu)}: {data_zakupu}";
         }
     }
 }

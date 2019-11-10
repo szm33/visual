@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
+    [Serializable]
     public class Katalog
     {
         private string tytul;
@@ -15,6 +16,11 @@ namespace Zadanie1._0
             this.tytul = tytul;
             this.autor = autor;
             this.id = id;
+        }
+
+        public string Info()
+        {
+            return tytul + ',' + autor + ',' + id ;
         }
 
         public string Tytul
@@ -41,7 +47,8 @@ namespace Zadanie1._0
 
         public override string ToString()
         {
-            return $"{nameof(tytul)}: {tytul}, {nameof(autor)}: {autor}, {nameof(id)}: {id}";
+            return tytul + ',' + autor + ',' + id;
+            //return $"{nameof(tytul)}: {tytul}, {nameof(autor)}: {autor}, {nameof(id)}: {id}";
         }
     }
 }

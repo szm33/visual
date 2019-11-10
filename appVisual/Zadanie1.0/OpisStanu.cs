@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Zadanie1._0
 {
+    [Serializable]
     public class OpisStanu
     {
         Katalog ksiazka;
@@ -16,6 +17,11 @@ namespace Zadanie1._0
             this.ilosc = ilosc;
             this.cena = cena;
 
+        }
+
+        public string Info()
+        {
+            return ksiazka.Info() + ',' + ilosc + ',' + cena;
         }
 
         public int Ilosc { get => ilosc; set => ilosc = value; }
@@ -31,7 +37,8 @@ namespace Zadanie1._0
 
         public override string ToString()
         {
-            return $"{nameof(ksiazka)}: {ksiazka.ToString()}, {nameof(cena)}: {cena}, {nameof(ilosc)}: {ilosc}";
+            return ksiazka.ToString() + ',' + ilosc + ',' + cena;
+            //return $"{nameof(ksiazka)}: {ksiazka.ToString()}, {nameof(cena)}: {cena}, {nameof(ilosc)}: {ilosc}";
         }
     }
 }
