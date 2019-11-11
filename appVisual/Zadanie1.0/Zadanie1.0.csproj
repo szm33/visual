@@ -53,8 +53,6 @@
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wykaz.cs" />
-    <Compile Include="WypelnianieLosowe.cs" />
-    <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="Zdarzenie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
