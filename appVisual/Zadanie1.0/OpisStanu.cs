@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -25,14 +26,45 @@ namespace Zadanie1._0
             return ksiazka.Info() + ',' + ilosc + ',' + cena;
         }
 
-        static public string Serialize(OpisStanu o,ObjectIDGenerator generator)
+        /* static public string Serialize(OpisStanu o,ObjectIDGenerator generator)
+         {
+             return o.GetType().Name + ',' + generator.GetId(o.Ksiazka, out bool firstTime1) + o.Ilosc + ',' + o.Cena + ',' + generator.GetId(o, out bool firstTime2);
+         }*/
+
+        static public string Serialize(OpisStanu o, ObjectIDGenerator generator)
         {
-            return o.GetType().Name + ',' + generator.GetId(o.Ksiazka, out bool firstTime1) + o.Ilosc + ',' + o.Cena + ',' + generator.GetId(o, out bool firstTime2);
+            long genId = generator.GetId(o, out bool firstTime);
+            if (firstTime)
+            {
+                return o.GetType().Name + ',' + Katalog.Serialize(o.ksiazka,generator) + ',' + o.Ilosc + ',' + o.Cena + ',' + genId;
+            }
+            else
+            {
+                return "" + genId;
+            }
         }
 
-        static public OpisStanu Deserialize(string[] pole, Dictionary<string, object> obiekty)
+        /* static public OpisStanu Deserialize(string[] pole, Dictionary<string, object> obiekty)
+         {
+             return new OpisStanu((Katalog)obiekty[pole[1]], Int32.Parse(pole[2]), Double.Parse(pole[3]));
+         }*/
+
+        static public OpisStanu Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
-            return new OpisStanu((Katalog)obiekty[pole[1]], Int32.Parse(pole[2]), Double.Parse(pole[3]));
+            if (pole[0] == "OpisStanu")
+            {
+                /*string[] poleKatalog = pole.Where(p => p != pole[0]).ToArray();*/
+                pole.RemoveAt(0);
+                OpisStanu o = new OpisStanu(Katalog.Deserialize(pole,obj), Int32.Parse(pole[0]), Double.Parse(pole[1]));
+                obj.Add(pole[2], o);
+                pole.RemoveRange(0, 3);
+                return o;
+            }
+            else
+            {
+                pole.RemoveRange(0, 1);
+                return (OpisStanu)obj[pole[0]];
+            }
         }
 
         public int Ilosc { get => ilosc; set => ilosc = value; }

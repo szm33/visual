@@ -127,27 +127,27 @@ namespace zadanie2
                 {
                     case "Katalog":
                         /*Katalog katalog = new Katalog(pole[1], pole[2], Int32.Parse(pole[3]));*/
-                        Katalog katalog = Katalog.Deseriazlie(pole);
+                        Katalog katalog = Katalog.Deserialize(new List<string>(pole),obiekty);
                         dataContext.ksiazki.Add(katalog.Id,katalog);
-                        obiekty.Add(pole[4], katalog);
+                      /*  obiekty.Add(pole[4], katalog);*/
                         break;
 
                     case "Wykaz":
                         /*Wykaz wykaz = new Wykaz(pole[1], pole[2], Int32.Parse(pole[3]));*/
-                        Wykaz wykaz = Wykaz.Deserialize(pole);
+                        Wykaz wykaz = Wykaz.Deserialize(new List<string>(pole),obiekty);
                         dataContext.czytelnicy.Add(wykaz);
-                        obiekty.Add(pole[4], wykaz);
+                       /* obiekty.Add(pole[4], wykaz);*/
                         break;
 
                     case "OpisStanu":
                         /* OpisStanu opisStanu = new OpisStanu((Katalog)obiekty[pole[1]], Int32.Parse(pole[2]), Double.Parse(pole[3]));*/
-                        OpisStanu opisStanu = OpisStanu.Deserialize(pole, obiekty);
+                        OpisStanu opisStanu = OpisStanu.Deserialize(new List<string>(pole), obiekty);
                         dataContext.opisy_ksiazek.Add(opisStanu);
-                        obiekty.Add(pole[4], opisStanu);
+                       /* obiekty.Add(pole[4], opisStanu);*/
                         break;
 
                     case "Zdarzenie":
-                        Zdarzenie zdarzenie = Zdarzenie.Deserialize(pole, obiekty);
+                        Zdarzenie zdarzenie = Zdarzenie.Deserialize(new List<string>(pole), obiekty);
                         dataContext.zdarzenia.Add(zdarzenie);
                         /*obiekty.Add(pole[7], zdarzenie);*/
                         break;

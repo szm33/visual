@@ -24,15 +24,42 @@ namespace Zadanie1._0
             return tytul + ',' + autor + ',' + id ;
         }
 
-        static public string Serialize(Katalog k,ObjectIDGenerator generator)
+        /*static public string Serialize(Katalog k,ObjectIDGenerator generator)
         {
             return k.GetType().Name + ',' + k.Tytul + ',' + k.Autor + ',' + k.Id + ',' + generator.GetId(k, out bool firstTime);
+        }*/
+
+        static public string Serialize(Katalog k, ObjectIDGenerator generator)
+        {
+            long genId = generator.GetId(k, out bool firstTime);
+            if (firstTime) {
+                return k.GetType().Name + ',' + k.Tytul + ',' + k.Autor + ',' + k.Id + ',' + genId;
+            }
+            else
+            {
+                return "" + genId;
+            }
         }
 
-        static public Katalog Deseriazlie(string[] pole)
+  /*      static public Katalog Deseriazlie(string[] pole)
         {
             return new Katalog(pole[1], pole[2], Int32.Parse(pole[3]));
-        
+        }*/
+
+        static public Katalog Deserialize(List<string> pole, Dictionary<string, object> obj)
+        {
+            if (pole[0] == "Katalog")
+            {
+                Katalog k = new Katalog(pole[1], pole[2], Int32.Parse(pole[3]));
+                obj.Add(pole[4], k);
+                pole.RemoveRange(0, 5);
+                return k;
+            }
+            else
+            {
+                pole.RemoveRange(0, 1);
+                return (Katalog)obj[pole[0]];
+            } 
         }
 
         public string Tytul

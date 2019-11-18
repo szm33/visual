@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -26,14 +27,45 @@ namespace Zadanie1._0
             return Osoba.Info() + ',' + opisKsiazki.Info() + ',' + data_zakupu.Year + ',' + data_zakupu.Month + ',' + data_zakupu.Day + ',' + nrTransakcji;
         }
 
-        static public string Serialize(Zdarzenie z,ObjectIDGenerator generator)
+        /* static public string Serialize(Zdarzenie z,ObjectIDGenerator generator)
+         {
+             return z.GetType().Name + ',' + generator.GetId(z.Osoba, out bool firstTime1) + ',' + generator.GetId(z.OpisKsiazki, out bool firstTime2) + ',' + z.Data_zakupu.Year + ',' + z.Data_zakupu.Month + ',' + z.Data_zakupu.Day + ',' + z.NrTransakcji + ',' + generator.GetId(z, out bool firstTime3);
+         }*/
+
+        static public string Serialize(Zdarzenie z, ObjectIDGenerator generator)
         {
-            return z.GetType().Name + ',' + generator.GetId(z.Osoba, out bool firstTime1) + ',' + generator.GetId(z.OpisKsiazki, out bool firstTime2) + ',' + z.Data_zakupu.Year + ',' + z.Data_zakupu.Month + ',' + z.Data_zakupu.Day + ',' + z.NrTransakcji + ',' + generator.GetId(z, out bool firstTime3);
+            long genId = generator.GetId(z, out bool firstTime);
+            if (firstTime)
+            {
+                return z.GetType().Name + ',' + Wykaz.Serialize(z.osoba,generator) + ',' + OpisStanu.Serialize(z.opisKsiazki,generator) + ',' + z.Data_zakupu.Year + ',' + z.Data_zakupu.Month + ',' + z.Data_zakupu.Day + ',' + z.NrTransakcji + ',' + genId;
+            }
+            else
+            {
+                return "" + genId;
+            }
         }
 
-        static public Zdarzenie Deserialize(string [] pole, Dictionary<string, object> obiekty)
+        /* static public Zdarzenie Deserialize(string [] pole, Dictionary<string, object> obiekty)
+         {
+             return new Zdarzenie((Wykaz)obiekty[pole[1]], (OpisStanu)obiekty[pole[2]], new DateTime(Int32.Parse(pole[3]), Int32.Parse(pole[4]), Int32.Parse(pole[5])), Int32.Parse(pole[6]));
+         }*/
+
+        
+        static public Zdarzenie Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
-            return new Zdarzenie((Wykaz)obiekty[pole[1]], (OpisStanu)obiekty[pole[2]], new DateTime(Int32.Parse(pole[3]), Int32.Parse(pole[4]), Int32.Parse(pole[5])), Int32.Parse(pole[6]));
+            if (pole[0] == "Zdarzenie")
+            {
+                pole.RemoveAt(0);
+                Zdarzenie z = new Zdarzenie(Wykaz.Deserialize(pole, obj),OpisStanu.Deserialize(pole,obj), new DateTime(Int32.Parse(pole[0]), Int32.Parse(pole[1]), Int32.Parse(pole[2])), Int32.Parse(pole[3]));
+                obj.Add(pole[4], z);
+                pole.RemoveRange(0, 5);
+                return z;
+            }
+            else
+            {
+                pole.RemoveRange(0, 1);
+                return (Zdarzenie)obj[pole[0]];
+            }
         }
 
         public DateTime Data_zakupu { get => data_zakupu; set => data_zakupu = value; }
