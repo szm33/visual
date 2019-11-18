@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Zadanie1._0
@@ -22,6 +23,17 @@ namespace Zadanie1._0
         {
             return imie + ',' + nazwisko + ',' + nr;
         }
+
+        static public string Serialize(Wykaz w,ObjectIDGenerator generator)
+        {
+            return w.GetType().Name + ',' + w.Imie + ',' + w.Nazwisko + ',' + w.Nr + ',' + generator.GetId(w,out bool firstTime); 
+        }
+
+        static public Wykaz Deserialize(string[] pole)
+        {
+            return new Wykaz(pole[1], pole[2], Int32.Parse(pole[3]);
+        }
+
 
         public string Imie { get => imie; set => imie = value; }
         public string Nazwisko { get => nazwisko; set => nazwisko = value; }

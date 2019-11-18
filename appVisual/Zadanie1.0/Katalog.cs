@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Zadanie1._0
@@ -21,6 +22,17 @@ namespace Zadanie1._0
         public string Info()
         {
             return tytul + ',' + autor + ',' + id ;
+        }
+
+        static public string Serialize(Katalog k,ObjectIDGenerator generator)
+        {
+            return k.GetType().Name + ',' + k.Tytul + ',' + k.Autor + ',' + k.Id + ',' + generator.GetId(k, out bool firstTime);
+        }
+
+        static public Katalog Deseriazlie(string[] pole)
+        {
+            return new Katalog(pole[1], pole[2], Int32.Parse(pole[3]));
+        
         }
 
         public string Tytul

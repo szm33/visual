@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Zadanie1._0
@@ -22,6 +23,16 @@ namespace Zadanie1._0
         public string Info()
         {
             return ksiazka.Info() + ',' + ilosc + ',' + cena;
+        }
+
+        static public string Serialize(OpisStanu o,ObjectIDGenerator generator)
+        {
+            return o.GetType().Name + ',' + generator.GetId(o.Ksiazka, out bool firstTime1) + o.Ilosc + ',' + o.Cena + ',' + generator.GetId(o, out bool firstTime2);
+        }
+
+        static public OpisStanu Deserialize(string[] pole, Dictionary<string, object> obiekty)
+        {
+            return new OpisStanu((Katalog)obiekty[pole[1]], Int32.Parse(pole[2]), Double.Parse(pole[3]));
         }
 
         public int Ilosc { get => ilosc; set => ilosc = value; }
