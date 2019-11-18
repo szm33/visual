@@ -37,7 +37,7 @@ namespace Zadanie1._0
             }
             else
             {
-                return "" + genId;
+                return k.GetType().Name + "_ref" + ',' + genId;
             }
         }
 
@@ -57,8 +57,9 @@ namespace Zadanie1._0
             }
             else
             {
-                pole.RemoveRange(0, 1);
-                return (Katalog)obj[pole[0]];
+                Katalog k = (Katalog)obj[pole[1]];
+                pole.RemoveRange(0, 2);
+                return k;
             } 
         }
 

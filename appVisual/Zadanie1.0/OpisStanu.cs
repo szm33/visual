@@ -40,7 +40,7 @@ namespace Zadanie1._0
             }
             else
             {
-                return "" + genId;
+                return o.GetType().Name + "_ref" + ',' + genId;
             }
         }
 
@@ -62,8 +62,9 @@ namespace Zadanie1._0
             }
             else
             {
-                pole.RemoveRange(0, 1);
-                return (OpisStanu)obj[pole[0]];
+                OpisStanu o = (OpisStanu)obj[pole[1]];
+                pole.RemoveRange(0, 2);
+                return o;
             }
         }
 

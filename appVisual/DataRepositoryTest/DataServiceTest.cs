@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1._0;
 using zadanie2;
@@ -97,7 +98,10 @@ namespace DataRepositoryTest
             {
                 Assert.AreEqual(kata[i], kata1[i]);
             }
-
+            Assert.AreEqual("Katalog", k1.GetType().Name);
+            ObjectIDGenerator g = new ObjectIDGenerator();
+            g.GetId(k1, out bool firstTime);
+            Assert.IsTrue(firstTime);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Zadanie1._0
             }
             else
             {
-                return "" + genId;
+                return z.GetType().Name + "_ref" + ',' + genId;
             }
         }
 
@@ -63,8 +63,9 @@ namespace Zadanie1._0
             }
             else
             {
-                pole.RemoveRange(0, 1);
-                return (Zdarzenie)obj[pole[0]];
+                Zdarzenie z = (Zdarzenie)obj[pole[1]];
+                pole.RemoveRange(0, 2);
+                return z;
             }
         }
 
