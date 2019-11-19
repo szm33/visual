@@ -122,7 +122,7 @@ namespace zadanie2
             Dictionary<string, object> obiekty = new Dictionary<string, object>();
             foreach (string linia in dane)
             {
-                string[] pole = linia.Split(',');
+                string[] pole = linia.Split(';');
                 switch (pole[0])
                 {
                     case "Katalog": 
@@ -188,7 +188,7 @@ namespace zadanie2
             Dictionary<string, object> obiekty = new Dictionary<string, object>();
             foreach (string linia in dane)
             {
-                string[] pole = linia.Split(',');
+                string[] pole = linia.Split(';');
                 switch (pole[0])
                 {
                     case "A":

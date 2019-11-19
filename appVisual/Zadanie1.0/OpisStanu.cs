@@ -36,11 +36,11 @@ namespace Zadanie1._0
             long genId = generator.GetId(o, out bool firstTime);
             if (firstTime)
             {
-                return o.GetType().Name + ',' + Katalog.Serialize(o.ksiazka,generator) + ',' + o.Ilosc + ',' + o.Cena + ',' + genId;
+                return o.GetType().Name + ';' + Katalog.Serialize(o.ksiazka,generator) + ';' + o.Ilosc + ';' + o.Cena + ';' + genId;
             }
             else
             {
-                return o.GetType().Name + "_ref" + ',' + genId;
+                return o.GetType().Name + "_ref" + ';' + genId;
             }
         }
 

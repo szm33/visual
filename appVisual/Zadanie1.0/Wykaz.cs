@@ -34,11 +34,11 @@ namespace Zadanie1._0
         {
             long genId = generator.GetId(w, out bool firstTime);
             if (firstTime) {
-                return w.GetType().Name + ',' + w.Imie + ',' + w.Nazwisko + ',' + w.Nr + ',' + genId;
+                return w.GetType().Name + ';' + w.Imie + ';' + w.Nazwisko + ';' + w.Nr + ';' + genId;
             }
             else
             {
-                return w.GetType().Name + "_ref" + ',' + genId;
+                return w.GetType().Name + "_ref" + ';' + genId;
             }
         }
 

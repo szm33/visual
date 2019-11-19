@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace zadanie2
 {
-    class C
+    public class C
     {
         private A a;
         private string name;
@@ -27,11 +27,11 @@ namespace zadanie2
             long genId = generator.GetId(c, out bool firstTime);
             if (firstTime)
             {
-                return c.GetType().Name + ',' + A.Serialize(c.A,generator) + ',' + c.Name + ',' + genId;
+                return c.GetType().Name + ';' + genId + ';' + A.Serialize(c.A,generator) + ';' + c.Name;
             }
             else
             {
-                return c.GetType().Name + "_ref" + ',' + genId;
+                return c.GetType().Name + "_ref" + ';' + genId;
             }
         }
 
@@ -43,6 +43,8 @@ namespace zadanie2
                 obj.Add(pole[1], c);
                 pole.RemoveRange(0, 2);
                 c.a = A.Deserialize(pole, obj);
+                c.Name = pole[0];
+                pole.RemoveRange(0, 1);
                 return c;
             }
             else

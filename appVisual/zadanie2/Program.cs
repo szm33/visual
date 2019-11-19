@@ -11,11 +11,16 @@ namespace zadanie2
     {
         static void Main(string[] args)
         {
-            Katalog k1 = new Katalog("tytul", "autor", 1);
-            Katalog k2 = new Katalog("tytul2", "autor2", 2);
-            string path= "katalogi.bin";
-            SerialClass<Katalog>.Serialize(path, k1);
-            SerialClass<Katalog>.Serialize(path, k2);
+            /* Katalog k1 = new Katalog("tytul", "autor", 1);
+             Katalog k2 = new Katalog("tytul2", "autor2", 2);
+             string path= "katalogi.bin";
+             SerialClass<Katalog>.Serialize(path, k1);
+             SerialClass<Katalog>.Serialize(path, k2);*/
+            /*DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new WypelnianieStalymi(5));
+            WlasnaSerializacja ser = new WlasnaSerializacja();
+            dataRepository.FillRepositoryWithDataFiller();
+            ser.SerializacjaDataContext("datacontext.txt", dataContext);*/
         }
     }
 }

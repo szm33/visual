@@ -37,11 +37,11 @@ namespace Zadanie1._0
             long genId = generator.GetId(z, out bool firstTime);
             if (firstTime)
             {
-                return z.GetType().Name + ',' + Wykaz.Serialize(z.osoba,generator) + ',' + OpisStanu.Serialize(z.opisKsiazki,generator) + ',' + z.Data_zakupu.Year + ',' + z.Data_zakupu.Month + ',' + z.Data_zakupu.Day + ',' + z.NrTransakcji + ',' + genId;
+                return z.GetType().Name + ';' + Wykaz.Serialize(z.osoba,generator) + ';' + OpisStanu.Serialize(z.opisKsiazki,generator) + ';' + z.Data_zakupu.Year + ';' + z.Data_zakupu.Month + ';' + z.Data_zakupu.Day + ';' + z.NrTransakcji + ';' + genId;
             }
             else
             {
-                return z.GetType().Name + "_ref" + ',' + genId;
+                return z.GetType().Name + "_ref" + ';' + genId;
             }
         }
 
