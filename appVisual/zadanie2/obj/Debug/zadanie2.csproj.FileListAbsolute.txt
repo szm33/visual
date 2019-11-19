@@ -1,9 +1,0 @@
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\bin\Debug\zadanie2.exe.config
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\bin\Debug\zadanie2.exe
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\bin\Debug\zadanie2.pdb
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\bin\Debug\Zadanie1.0.dll
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\bin\Debug\Zadanie1.0.pdb
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\obj\Debug\zadanie2.csprojAssemblyReference.cache
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\obj\Debug\zadanie2.csproj.CopyComplete
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\obj\Debug\zadanie2.exe
-C:\Users\SzymonDobrowolski\Desktop\vis\visual\appVisual\zadanie2\obj\Debug\zadanie2.pdb
