@@ -278,7 +278,6 @@ namespace DataRepositoryTest
             Assert.IsNull(dataRepository.GetOpisStanu(1));
         }
 
-
         [TestMethod]
         public void UpdateOpisStanuTest()
         {
@@ -314,11 +313,7 @@ namespace DataRepositoryTest
             for (int i = 0; i < 5; i++)
             {
                 Assert.IsTrue(dataRepository.GetAllOpisStanu().ToList()[i].Ilosc <= 100);
-            }
-            
+            }   
         }
-
-
-
     }
 }

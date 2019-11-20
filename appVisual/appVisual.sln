@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRepositoryTest", "DataR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationTest", "SerializationTest\SerializationTest.csproj", "{D28D9A90-2EC6-43C5-854E-994CAF95AF7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization", "SerializacjaZadanie2\Serialization.csproj", "{B26CFB60-AFC8-4FA0-B168-2187325D1118}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization", "Serialization\Serialization.csproj", "{B26CFB60-AFC8-4FA0-B168-2187325D1118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
