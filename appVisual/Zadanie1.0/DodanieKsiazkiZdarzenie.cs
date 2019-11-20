@@ -45,7 +45,7 @@ namespace Zadanie1._0
             }
             else
             {
-                Zdarzenie z = (Zdarzenie)obj[pole[1]];
+                Zdarzenie z = (DodanieKsiazkiZdarzenie)obj[pole[1]];
                 pole.RemoveRange(0, 2);
                 return z;
             }

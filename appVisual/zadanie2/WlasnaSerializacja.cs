@@ -149,8 +149,23 @@ namespace zadanie2
                        /* obiekty.Add(pole[4], opisStanu);*/
                         break;
                     case "KupienieKsiazkiZdarzenie":
+                    case "KupienieKsiazkiZdarzenie_ref":
+                        Zdarzenie kupienieKsiazkiZdarzenie = KupienieKsiazkiZdarzenie.Deserialize(new List<string>(pole), obiekty);
+                        dataContext.zdarzenia.Add(kupienieKsiazkiZdarzenie);
+                        /*obiekty.Add(pole[7], zdarzenie);*/
+                        break;
                     case "DodanieKsiazkiZdarzenie":
+                    case "DodanieKsiazkiZdarzenie_ref":
+                        Zdarzenie dodanieKsiazkiZdarzenie = DodanieKsiazkiZdarzenie.Deserialize(new List<string>(pole), obiekty);
+                        dataContext.zdarzenia.Add(dodanieKsiazkiZdarzenie);
+                        /*obiekty.Add(pole[7], zdarzenie);*/
+                        break;
                     case "DostawaZdarzenie":
+                    case "DostawaZdarzenie_ref":
+                        Zdarzenie dostawaZdarzenie = DostawaZdarzenie.Deserialize(new List<string>(pole), obiekty);
+                        dataContext.zdarzenia.Add(dostawaZdarzenie);
+                        /*obiekty.Add(pole[7], zdarzenie);*/
+                        break;
                     case "Zdarzenie":
                     case "Zdarzenie_ref":
                         Zdarzenie zdarzenie = Zdarzenie.Deserialize(new List<string>(pole), obiekty);
