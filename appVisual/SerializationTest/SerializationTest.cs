@@ -76,10 +76,10 @@ namespace SerializationTest
             OpisStanu opisStanu2 = new OpisStanu(ksiazka2, 20, 20.50);
             List<OpisStanu> opisyStanu = new List<OpisStanu> { opisStanu1, opisStanu2 };
 
-            Zdarzenie zdarzenie1 = new DodanieKsiazkiZdarzenie(osoba1, opisStanu1, DateTime.Now, 1);
-            Zdarzenie zdarzenie2 = new DodanieKsiazkiZdarzenie(osoba2, opisStanu2, DateTime.Now, 2);
-//            Zdarzenie zdarzenie1 = new Zdarzenie(osoba1, opisStanu1, DateTime.Now.Date, 1);
-//            Zdarzenie zdarzenie2 = new Zdarzenie(osoba2, opisStanu2, DateTime.Now.Date, 2);
+//            Zdarzenie zdarzenie1 = new DodanieKsiazkiZdarzenie(osoba1, opisStanu1, DateTime.Now, 1);
+//            Zdarzenie zdarzenie2 = new DodanieKsiazkiZdarzenie(osoba2, opisStanu2, DateTime.Now, 2);
+            Zdarzenie zdarzenie1 = new Zdarzenie(osoba1, opisStanu1, DateTime.Now.Date, 1);
+            Zdarzenie zdarzenie2 = new Zdarzenie(osoba2, opisStanu2, DateTime.Now.Date, 2);
             ObservableCollection<Zdarzenie> zdarzenia = new ObservableCollection<Zdarzenie> { zdarzenie1, zdarzenie2 };
 
 
@@ -96,6 +96,20 @@ namespace SerializationTest
             CollectionAssert.AreEqual(dataContext.czytelnicy, dataContextDes.czytelnicy);
             CollectionAssert.AreEqual(dataContext.opisy_ksiazek, dataContextDes.opisy_ksiazek);
             CollectionAssert.AreEqual(dataContext.zdarzenia, dataContextDes.zdarzenia);
+        }
+
+        [TestMethod]
+        public void WlasnaSerializacjaRekurencjaTest()
+        {
+            Rekurencja rekurencja = new Rekurencja();
+            rekurencja.Fill();
+            String path = "rekurencjaOwnSerializationTest.bin";
+
+            SerialClass<Rekurencja>.Serialize(path, rekurencja);
+
+            Rekurencja rekurencjaDes = SerialClass<Rekurencja>.Deserialize(path);
+
+            Assert.AreEqual(rekurencja, rekurencjaDes);
         }
     }
 }
