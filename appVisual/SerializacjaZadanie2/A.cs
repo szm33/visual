@@ -13,8 +13,6 @@ namespace zadanie2
         private B b;
         private string name;
 
-        public string Name { get => name; set => name = value; }
-        internal B B { get => b; set => b = value; }
 
         public A() { }
 
@@ -24,7 +22,10 @@ namespace zadanie2
             this.name = name;
         }
 
-       static public string Serialize(A a, ObjectIDGenerator generator)
+        public string Name { get => name; set => name = value; }
+        internal B B { get => b; set => b = value; }
+
+        public static string Serialize(A a, ObjectIDGenerator generator)
         {
             long genId = generator.GetId(a, out bool firstTime);
             if (firstTime)
@@ -37,7 +38,7 @@ namespace zadanie2
             }
         }
 
-        static public A Deserialize(List<string> pole, Dictionary<string, object> obj)
+        public static A Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
             if (pole[0] == "A")
             {

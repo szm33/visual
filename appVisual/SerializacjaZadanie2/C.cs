@@ -13,8 +13,6 @@ namespace zadanie2
         private A a;
         private string name;
 
-        public string Name { get => name; set => name = value; }
-
         public C() { }
 
         public C(A a, string name)
@@ -23,7 +21,10 @@ namespace zadanie2
             this.name = name;
         }
 
-        static public string Serialize(C c, ObjectIDGenerator generator)
+        public string Name { get => name; set => name = value; }
+        internal A A { get => a; set => a = value; }
+
+        public static string Serialize(C c, ObjectIDGenerator generator)
         {
             long genId = generator.GetId(c, out bool firstTime);
             if (firstTime)
@@ -36,7 +37,7 @@ namespace zadanie2
             }
         }
 
-        static public C Deserialize(List<string> pole, Dictionary<string, object> obj)
+        public static C Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
             if (pole[0] == "C")
             {
@@ -55,8 +56,6 @@ namespace zadanie2
                 return c;
             }
         }
-
-        internal A A { get => a; set => a = value; }
 
         public override bool Equals(object obj)
         {

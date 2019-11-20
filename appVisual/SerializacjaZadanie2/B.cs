@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace zadanie2
 {
@@ -13,9 +10,6 @@ namespace zadanie2
         private C c;
         private string name;
 
-        public string Name { get => name; set => name = value; }
-        internal C C { get => c; set => c = value; }
-
         public B() { }
 
         public B(C c, string name)
@@ -24,7 +18,10 @@ namespace zadanie2
             this.name = name;
         }
 
-        static public string Serialize(B b, ObjectIDGenerator generator)
+        public string Name { get => name; set => name = value; }
+        internal C C { get => c; set => c = value; }
+
+        public static string Serialize(B b, ObjectIDGenerator generator)
         {
             long genId = generator.GetId(b, out bool firstTime);
             if (firstTime)
@@ -37,7 +34,7 @@ namespace zadanie2
             }
         }
 
-        static public B Deserialize(List<string> pole, Dictionary<string, object> obj)
+        public static B Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
             if (pole[0] == "B")
             {

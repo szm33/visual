@@ -1,0 +1,8 @@
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\bin\Debug\SerializacjaZadanie2.dll
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\bin\Debug\SerializacjaZadanie2.pdb
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\bin\Debug\Zadanie1.0.dll
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\bin\Debug\Zadanie1.0.pdb
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\obj\Debug\Serialization.csproj.CopyComplete
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\obj\Debug\SerializacjaZadanie2.dll
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\obj\Debug\SerializacjaZadanie2.pdb
+C:\Users\Maciej\Desktop\TP2\visual\appVisual\SerializacjaZadanie2\obj\Debug\Serialization.csprojAssemblyReference.cache

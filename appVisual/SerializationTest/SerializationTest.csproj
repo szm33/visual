@@ -56,13 +56,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SerializacjaZadanie2\Serialization.csproj">
+      <Project>{b26cfb60-afc8-4fa0-b168-2187325d1118}</Project>
+      <Name>Serialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zadanie1.0\Zadanie1.0.csproj">
       <Project>{b8ad7164-b44a-4cfe-9200-fce27dabc019}</Project>
       <Name>Zadanie1.0</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\zadanie2\zadanie2.csproj">
-      <Project>{a799ec1d-2365-42a7-8d80-520fc2b02648}</Project>
-      <Name>zadanie2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
