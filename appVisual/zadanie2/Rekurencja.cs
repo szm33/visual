@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace zadanie2
 {
+    [Serializable]
     public class Rekurencja
     {
         public List<A> aElements= new List<A>();
@@ -29,6 +30,17 @@ namespace zadanie2
                 bElements.Add(b);
                 cElements.Add(c);
             }
+        }
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Rekurencja r = (Rekurencja)obj;
+            return aElements.SequenceEqual(r.aElements) && bElements.SequenceEqual(r.bElements) &&
+                   cElements.SequenceEqual(r.cElements);
         }
     }
 }

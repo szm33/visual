@@ -47,6 +47,21 @@ namespace SerializationTest
         }
 
         [TestMethod]
+        public void SerialClassTestRekurencja()
+        {
+            Rekurencja rekurencja = new Rekurencja();
+            rekurencja.Fill();
+            String path = "rekurencjaTest.bin";
+
+            SerialClass<Rekurencja>.Serialize(path, rekurencja);
+
+            Rekurencja rekurencjaDes = SerialClass<Rekurencja>.Deserialize(path);
+
+            Assert.AreEqual(rekurencja, rekurencjaDes);
+
+        }
+
+        [TestMethod]
         public void WlasnaSerializacjaTestDataContext()
         {
 

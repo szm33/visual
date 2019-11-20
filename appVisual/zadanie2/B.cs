@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace zadanie2
 {
+    [Serializable]
     public class B
     {
         private C c;
         private string name;
 
         public string Name { get => name; set => name = value; }
+        internal C C { get => c; set => c = value; }
 
         public B() { }
 
@@ -55,6 +57,17 @@ namespace zadanie2
             }
         }
 
-        internal C C { get => c; set => c = value; }
+        
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            B b = (B)obj;
+            return Name == b.Name && C.Name == b.C.Name && C.A.Name == b.C.A.Name && Name == b.C.A.B.Name;
+        }
+
     }
 }
