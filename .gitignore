@@ -13,5 +13,7 @@ appVisual/DataRepositoryTest/bin/
 appVisual/DataRepositoryTest/obj/
 appVisual/SerializationTest/bin/*
 appVisual/SerializationTest/obj/*
+appVisual/Serialization/bin/*
+appVisual/Serialization/obj/*
 appVisual/TestResults/
 appVisual/packages
