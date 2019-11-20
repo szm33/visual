@@ -13,10 +13,9 @@ namespace DataRepositoryTest
         {
             DataContext dataContext = new DataContext();
             DataRepository dataRepository = new DataRepository(dataContext, new WypelnianieStalymi(5));
-            WlasnaSerializacja ser = new WlasnaSerializacja();
             dataRepository.FillRepositoryWithDataFiller();
-            ser.SerializacjaDataContext("datacontext.txt", dataContext);
-            DataContext d = ser.DeserializacjaDataContext("datacontext.txt");
+            WlasnaSerializacja.SerializacjaDataContext("datacontext.txt", dataContext);
+            DataContext d = WlasnaSerializacja.DeserializacjaDataContext("datacontext.txt");
             /*Assert.AreEqual(dataContext,ser.DeserializacjaDataContext("datacontext.txt"));*/
             for (int i = 0; i < d.zdarzenia.Count; i++)
             {
@@ -36,9 +35,8 @@ namespace DataRepositoryTest
             Rekurencja rek = new Rekurencja();
             Rekurencja rek1 = new Rekurencja();
             rek.Fill();
-            WlasnaSerializacja ser = new WlasnaSerializacja();
-            ser.SerializacjaRekurencyja("rekurencja.txt", rek);
-            rek1 = ser.DeserializacjaRekurencja("rekurencja.txt");
+            WlasnaSerializacja.SerializacjaRekurencyja("rekurencja.txt", rek);
+            rek1 = WlasnaSerializacja.DeserializacjaRekurencja("rekurencja.txt");
             Assert.IsTrue(rek.cElements[0].Name == rek1.cElements[0].Name);
             Assert.IsTrue( rek1.cElements[0].Name == "c0");
         }

@@ -32,7 +32,7 @@ namespace Zadanie1._0
              return z.GetType().Name + ',' + generator.GetId(z.Osoba, out bool firstTime1) + ',' + generator.GetId(z.OpisKsiazki, out bool firstTime2) + ',' + z.Data_zakupu.Year + ',' + z.Data_zakupu.Month + ',' + z.Data_zakupu.Day + ',' + z.NrTransakcji + ',' + generator.GetId(z, out bool firstTime3);
          }*/
 
-        static public string Serialize(Zdarzenie z, ObjectIDGenerator generator)
+        public static string Serialize(Zdarzenie z, ObjectIDGenerator generator)
         {
             long genId = generator.GetId(z, out bool firstTime);
             if (firstTime)
@@ -51,7 +51,7 @@ namespace Zadanie1._0
          }*/
 
         
-        static public Zdarzenie Deserialize(List<string> pole, Dictionary<string, object> obj)
+        public static Zdarzenie Deserialize(List<string> pole, Dictionary<string, object> obj)
         {
             if (pole[0] == "Zdarzenie")
             {

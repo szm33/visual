@@ -92,7 +92,7 @@ namespace zadanie2
             return zdarzenia;
         }
 
-        public void SerializacjaDataContext(string path, DataContext dataContext)
+        public static void SerializacjaDataContext(string path, DataContext dataContext)
         {
             ObjectIDGenerator generator = new ObjectIDGenerator();
             string dane = "";
@@ -115,7 +115,7 @@ namespace zadanie2
             System.IO.File.WriteAllText(@path, dane);
         }
 
-        public DataContext DeserializacjaDataContext(string path)
+        public static DataContext DeserializacjaDataContext(string path)
         {
             DataContext dataContext = new DataContext();
             string[] dane = System.IO.File.ReadAllLines(@path);
@@ -148,7 +148,9 @@ namespace zadanie2
                         dataContext.opisy_ksiazek.Add(opisStanu);
                        /* obiekty.Add(pole[4], opisStanu);*/
                         break;
-
+                    case "KupienieKsiazkiZdarzenie":
+                    case "DodanieKsiazkiZdarzenie":
+                    case "DostawaZdarzenie":
                     case "Zdarzenie":
                     case "Zdarzenie_ref":
                         Zdarzenie zdarzenie = Zdarzenie.Deserialize(new List<string>(pole), obiekty);
@@ -162,7 +164,7 @@ namespace zadanie2
         }
 
 
-        public void SerializacjaRekurencyja(string path, Rekurencja rekurencja)
+        public static void SerializacjaRekurencyja(string path, Rekurencja rekurencja)
         {
             ObjectIDGenerator generator = new ObjectIDGenerator();
             string dane = "";
@@ -181,7 +183,7 @@ namespace zadanie2
             System.IO.File.WriteAllText(@path, dane);
         }
 
-        public Rekurencja DeserializacjaRekurencja(string path)
+        public static Rekurencja DeserializacjaRekurencja(string path)
         {
             Rekurencja rekurencja = new Rekurencja();
             string[] dane = System.IO.File.ReadAllLines(@path);
