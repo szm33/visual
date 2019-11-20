@@ -75,6 +75,17 @@ namespace Zadanie1._0
         internal OpisStanu OpisKsiazki { get => opisKsiazki; set => opisKsiazki = value; }
         public Wykaz Osoba { get => osoba; set => osoba = value; }
 
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Zdarzenie z = (Zdarzenie)obj;
+            return nrTransakcji == z.nrTransakcji && osoba.Equals(z.osoba) && opisKsiazki.Equals(z.opisKsiazki) && data_zakupu == z.Data_zakupu;
+        }
+
         public override string ToString()
         {
             return Osoba.ToString() + ',' + opisKsiazki.ToString() + ',' + data_zakupu.Year + ',' + data_zakupu.Month + ',' + data_zakupu.Day + ',' + nrTransakcji;

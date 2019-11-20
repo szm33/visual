@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace zadanie2
 {
-    class SerialClass<T>
+    public class SerialClass<T>
     {
         public static void Serialize(string path, T obj)
         {

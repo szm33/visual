@@ -70,8 +70,13 @@ namespace Zadanie1._0
 
         public override bool Equals(object obj)
         {
-            return obj is Wykaz wykaz &&
-                   Nr == wykaz.Nr;
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Wykaz w = (Wykaz)obj;
+            return imie == w.imie && nazwisko == w.nazwisko && nr == w.nr;
         }
 
         public override string ToString()

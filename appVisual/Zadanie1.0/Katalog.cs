@@ -81,8 +81,13 @@ namespace Zadanie1._0
 
         public override bool Equals(object obj)
         {
-            return obj is Katalog katalog &&
-                   id == katalog.id;
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Katalog k = (Katalog)obj;
+            return tytul == k.tytul && autor == k.autor && id == k.id;
         }
 
         public override string ToString()

@@ -75,8 +75,14 @@ namespace Zadanie1._0
 
         public override bool Equals(object obj)
         {
-            return obj is OpisStanu stanu &&
-                   ksiazka == stanu.ksiazka;
+            if ((obj == null) || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            OpisStanu o = (OpisStanu)obj;
+            double TOLERANCE = 0.1;
+            return ksiazka.Equals(o.ksiazka) && Math.Abs(cena - o.cena) < TOLERANCE && ilosc == o.ilosc;
         }
 
         public override string ToString()
