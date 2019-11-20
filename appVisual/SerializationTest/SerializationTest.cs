@@ -105,9 +105,9 @@ namespace SerializationTest
             rekurencja.Fill();
             String path = "rekurencjaOwnSerializationTest.bin";
 
-            SerialClass<Rekurencja>.Serialize(path, rekurencja);
+            OwnSerializationRecurent.SerializacjaRekurencyja(path, rekurencja);
 
-            Rekurencja rekurencjaDes = SerialClass<Rekurencja>.Deserialize(path);
+            Rekurencja rekurencjaDes = OwnSerializationRecurent.DeserializacjaRekurencja(path);
 
             Assert.AreEqual(rekurencja, rekurencjaDes);
         }

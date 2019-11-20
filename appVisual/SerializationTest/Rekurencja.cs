@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zadanie2
+namespace SerializationTest
 {
     [Serializable]
     public class Rekurencja

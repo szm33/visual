@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace zadanie2
+namespace SerializationTest
 {
     [Serializable]
     public class B
