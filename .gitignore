@@ -7,7 +7,11 @@
 /appVisual/.vs/appVisual/v16
 appVisual/Zadanie1.0/obj/
 appVisual/Zadanie1.0/bin/
+appVisual/zadanie2/obj/
+appVisual/zadanie2/bin/
 appVisual/DataRepositoryTest/bin/
 appVisual/DataRepositoryTest/obj/
+appVisual/SerializationTest/bin/*
+appVisual/SerializationTest/obj/*
 appVisual/TestResults/
 appVisual/packages

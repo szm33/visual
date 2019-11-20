@@ -23,7 +23,7 @@ namespace Zadanie1._0
             if (iloscKsiazek >= ile)
             {
                 repo.UpdateOpisStanu(idKsiazki, repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscKsiazek - ile, cenaKsiazki));
-                repo.AddZdarzenie(repo.CreateKupienieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscKsiazek - ile, cenaKsiazki), DateTime.Now));
+                repo.AddZdarzenie(repo.CreateKupienieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscKsiazek - ile, cenaKsiazki), DateTime.Now.Date));
             }
         }
         public void DodanieKsiazki(int nrOsoby, int idKsiazki, String tytul, String autor)
@@ -32,7 +32,7 @@ namespace Zadanie1._0
             {
                 repo.AddKatalog(repo.CreatKatalog(tytul, autor, idKsiazki));
                 repo.AddOpisStanu(repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), 0, 0.0));
-                repo.AddZdarzenie(repo.CreateDodanieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), 0, 0.0), DateTime.Now));
+                repo.AddZdarzenie(repo.CreateDodanieKsiazkiZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), 0, 0.0), DateTime.Now.Date));
             }
         }
 
@@ -42,7 +42,7 @@ namespace Zadanie1._0
             {
                 int iloscObecna = repo.GetOpisStanu(idKsiazki).Ilosc;
                 repo.UpdateOpisStanu(idKsiazki, repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscObecna + ilosc, cena));
-                repo.AddZdarzenie(repo.CreateDostawaZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscObecna + ilosc, cena), DateTime.Now));
+                repo.AddZdarzenie(repo.CreateDostawaZdarzenie(repo.GetWykaz(nrOsoby), repo.CreateOpisStanu(repo.GetKatalog(idKsiazki), iloscObecna + ilosc, cena), DateTime.Now.Date));
             }
         }
 
