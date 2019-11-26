@@ -1,64 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerializationTest
 {
     [Serializable]
-    public class A
+    public class A : ISerializable
     {
-        private B b;
-        private string name;
-
+        public string Name { get; set; }
+        internal B ClassB { get; set; }
 
         public A() { }
 
         public A(B b, string name)
         {
-            this.b = b;
-            this.name = name;
+            ClassB = b;
+            Name = name;
         }
 
-        public string Name { get => name; set => name = value; }
-        internal B B { get => b; set => b = value; }
-
-        public static string Serialize(A a, ObjectIDGenerator generator)
+        public A(SerializationInfo info, StreamingContext context)
         {
-            long genId = generator.GetId(a, out bool firstTime);
-            if (firstTime)
-            {
-                return a.GetType().Name + ';' + genId + ';' + B.Serialize(a.B,generator) + ';' + a.Name;
-            }
-            else
-            {
-                return a.GetType().Name + "_ref" + ';' + genId;
-            }
+            Name = info.GetString("Name");
+            ClassB = (B)info.GetValue("ClassB", typeof(B));
         }
 
-        public static A Deserialize(List<string> pole, Dictionary<string, object> obj)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (pole[0] == "A")
-            {
-                A a = new A();
-                obj.Add(pole[1], a);
-                pole.RemoveRange(0, 2);
-                a.b = B.Deserialize(pole, obj);
-                a.Name = pole[0];
-                pole.RemoveRange(0, 1);
-                return a;
-            }
-            else
-            {
-                A a = (A)obj[pole[1]];
-                pole.RemoveRange(0, 2);
-                return a;
-            }
+            info.AddValue("Name", Name);
+            info.AddValue("ClassB", ClassB, typeof(B));
         }
-
-
 
         public override bool Equals(object obj)
         {
@@ -68,7 +37,7 @@ namespace SerializationTest
             }
 
             A a = (A)obj;
-            return Name == a.Name && b.Name == a.b.Name && b.C.Name == a.b.C.Name && Name == a.b.C.A.Name;
+            return Name == a.Name && ClassB.Name == a.ClassB.Name && ClassB.ClassC.Name == a.ClassB.ClassC.Name && Name == a.ClassB.ClassC.ClassA.Name;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1._0;
 using zadanie2;
@@ -105,11 +106,28 @@ namespace SerializationTest
             rekurencja.Fill();
             String path = "rekurencjaOwnSerializationTest.bin";
 
-            OwnSerializationRecurent.SerializacjaRekurencyja(path, rekurencja);
+            OwnSerializationRecurent osr = new OwnSerializationRecurent();
+            A a = new A();
+            B b = new B();
+            C c = new C();
 
-            Rekurencja rekurencjaDes = OwnSerializationRecurent.DeserializacjaRekurencja(path);
+            a.Name = "klasa A";
+            b.Name = "klasa B";
+            c.Name = "klasa C";
+            a.ClassB = b;
+            b.ClassC = c;
+            c.ClassA = a;
 
-            Assert.AreEqual(rekurencja, rekurencjaDes);
+            using (FileStream fs = new FileStream(path, FileMode.Create))
+            {
+                osr.Serialize(fs, a);
+            }
+
+            string result = File.ReadAllText(path);
+
+            System.Diagnostics.Debug.WriteLine(result);
+            
+
         }
     }
 }

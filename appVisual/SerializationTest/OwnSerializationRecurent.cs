@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -7,58 +8,173 @@ using System.Threading.Tasks;
 
 namespace SerializationTest
 {
-    class OwnSerializationRecurent
+    class OwnSerializationRecurent : Formatter
     {
-        public static void SerializacjaRekurencyja(string path, Rekurencja rekurencja)
+        public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override StreamingContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override object Deserialize(Stream serializationStream)
         {
-            ObjectIDGenerator generator = new ObjectIDGenerator();
-            string dane = "";
-            foreach (A a in rekurencja.aElements)
-            {
-                dane += A.Serialize(a, generator) + "\n";
-            }
-            foreach (B b in rekurencja.bElements)
-            {
-                dane += B.Serialize(b, generator) + "\n";
-            }
-            foreach (C c in rekurencja.cElements)
-            {
-                dane += C.Serialize(c, generator) + "\n";
-            }
-            System.IO.File.WriteAllText(@path, dane);
+            throw new NotImplementedException();
         }
 
-        public static Rekurencja DeserializacjaRekurencja(string path)
+        public override void Serialize(Stream serializationStream, object graph)
         {
-            Rekurencja rekurencja = new Rekurencja();
-            string[] dane = System.IO.File.ReadAllLines(@path);
-            Dictionary<string, object> obiekty = new Dictionary<string, object>();
-            foreach (string linia in dane)
+            ISerializable _data = (ISerializable)graph;
+            SerializationInfo _info = new SerializationInfo(graph.GetType(), new FormatterConverter());
+            StreamingContext _context = new StreamingContext(StreamingContextStates.File);
+            _data.GetObjectData(_info, _context);
+
+            foreach (SerializationEntry _item in _info)
+                this.WriteMember(_item.Name, _item.Value);
+
+            System.Diagnostics.Debug.WriteLine("value: " + data);
+
+
+            dataForSave.Add(data + "\n");
+            data = "";
+
+
+
+            while (this.m_objectQueue.Count != 0)
             {
-                string[] pole = linia.Split(';');
-                switch (pole[0])
+                this.Serialize(null, this.m_objectQueue.Dequeue());
+            }
+
+            if (null != serializationStream) 
+            {
+                using (StreamWriter writer = new StreamWriter(serializationStream))
                 {
-                    case "A":
-                    case "A_ref":
-                        A a = A.Deserialize(new List<string>(pole), obiekty);
-                        rekurencja.aElements.Add(a);
-                        break;
-
-                    case "B":
-                    case "B_ref":
-                        B b = B.Deserialize(new List<string>(pole), obiekty);
-                        rekurencja.bElements.Add(b);
-                        break;
-
-                    case "C":
-                    case "C_ref":
-                        C c = C.Deserialize(new List<string>(pole), obiekty);
-                        rekurencja.cElements.Add(c);
-                        break;
+                    foreach (string line in dataForSave)
+                        writer.Write(line);
                 }
             }
-            return rekurencja;
+            
+        }
 
+        private List<string> dataForSave = new List<string>();
+        private string data = "";
+
+        protected void WriteString(object obj, string name)
+        {
+            data += obj.GetType() + "(" + name + "=" + (string)obj + ")|";
+        }
+        protected void WriteObject(object obj, string name, Type type)
+        {
+            if (null != obj)
+            {
+                data += type.ToString() + "(" + name + "=" + this.m_idGenerator.GetId(obj, out bool firstTime).ToString() + ")|";
+                if (firstTime)
+                {
+                    this.m_objectQueue.Enqueue(obj);
+                }
+                else
+                {
+                    data = "";
+                }
+            }
+            else
+            {
+                data += "nullRef(" + name + "=-1)";
+            }
+        }
+
+        protected override void WriteObjectRef(object obj, string name, Type memberType)
+        {
+            if (memberType.Equals(typeof(String)))
+            {
+                WriteString(obj, name);
+            }
+            else
+            {
+                WriteObject(obj, name, memberType);
+            }
+        }
+
+        protected override void WriteArray(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteBoolean(bool val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteByte(byte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteChar(char val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDateTime(DateTime val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDecimal(decimal val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDouble(double val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt16(short val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt32(int val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt64(long val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSByte(sbyte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSingle(float val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteTimeSpan(TimeSpan val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt16(ushort val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt32(uint val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt64(ulong val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteValueType(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -23,9 +23,9 @@ namespace SerializationTest
                 a.Name = "a" + i;
                 b.Name = "b" + i;
                 c.Name = "c" + i;
-                a.B = b;
-                b.C = c;
-                c.A = a;
+                a.ClassB = b;
+                b.ClassC = c;
+                c.ClassA = a;
                 aElements.Add(a);
                 bElements.Add(b);
                 cElements.Add(c);
