@@ -116,16 +116,26 @@ namespace SerializationTest
             c.Name = "klasa C";
             a.ClassB = b;
             b.ClassC = c;
-            c.ClassA = a;
+            c.ClassA = null;
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 osr.Serialize(fs, a);
+                
             }
-
             string result = File.ReadAllText(path);
 
             System.Diagnostics.Debug.WriteLine(result);
+            A a_tmp;
+
+            using (FileStream s = new FileStream(path, FileMode.Open))
+            {
+                a_tmp = (A)osr.Deserialize(s);
+            }
+
+            System.Diagnostics.Debug.WriteLine(result);
+
+            System.Diagnostics.Debug.WriteLine(a_tmp.Name);
             
 
         }
