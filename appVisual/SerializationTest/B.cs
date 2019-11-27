@@ -8,21 +8,24 @@ namespace SerializationTest
     {
         public string Name { get; set; }
         public float Number { get; set; }
+        public DateTime Date { get; set; }
         internal C ClassC { get; set; }
 
         public B() { }
 
-        public B(C c, string name, float number)
+        public B(C c, string name, float number, DateTime date)
         {
             ClassC = c;
             Name = name;
             Number = number;
+            Date = date;
         }
 
         public B(SerializationInfo info, StreamingContext context)
         {
             Name = info.GetString("Name");
             Number = info.GetSingle("Number");
+            Date = info.GetDateTime("Date");
             ClassC = (C)info.GetValue("ClassC", typeof(C));
         }
 
@@ -30,6 +33,7 @@ namespace SerializationTest
         {
             info.AddValue("Name", Name);
             info.AddValue("Number", Number);
+            info.AddValue("Date", Date);
             info.AddValue("ClassC", ClassC, typeof(C));
         }
 

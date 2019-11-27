@@ -120,6 +120,9 @@ namespace SerializationTest
             a.Number = 1.23F;
             b.Number = 2.555F;
             c.Number = 56.9283F;
+            a.Date = DateTime.Now;
+            b.Date = DateTime.Now;
+            c.Date = DateTime.Now;
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {

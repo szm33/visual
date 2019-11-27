@@ -97,8 +97,8 @@ namespace SerializationTest
                 case "System.String":
                     info.AddValue(name, value);
                     break;
-                case "System.Integar":
-                    info.AddValue(name, System.Convert.ToInt32(value));
+                case "System.DateTime":
+                    info.AddValue(name, DateTime.Parse(value));
                     break;
             }
         }
@@ -178,6 +178,11 @@ namespace SerializationTest
             data += val.GetType() + "(-)" + name + "(-)" + (string)val.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "(|)";
         }
 
+        protected override void WriteDateTime(DateTime val, string name)
+        {
+            data += val.GetType() + "(-)" + name + "(-)" + (string)val.ToUniversalTime().ToString() + "(|)";
+        }
+
         protected override void WriteArray(object obj, string name, Type memberType)
         {
             throw new NotImplementedException();
@@ -194,11 +199,6 @@ namespace SerializationTest
         }
 
         protected override void WriteChar(char val, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void WriteDateTime(DateTime val, string name)
         {
             throw new NotImplementedException();
         }
