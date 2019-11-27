@@ -116,7 +116,10 @@ namespace SerializationTest
             c.Name = "klasa C";
             a.ClassB = b;
             b.ClassC = c;
-            c.ClassA = null;
+            c.ClassA = a;
+            a.Number = 1.23F;
+            b.Number = 2.555F;
+            c.Number = 56.9283F;
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {

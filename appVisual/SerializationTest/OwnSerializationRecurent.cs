@@ -91,6 +91,9 @@ namespace SerializationTest
         {
             switch (type)
             {
+                case "System.Single":
+                    info.AddValue(name, Single.Parse(value, System.Globalization.CultureInfo.InvariantCulture));
+                    break;
                 case "System.String":
                     info.AddValue(name, value);
                     break;
@@ -170,6 +173,11 @@ namespace SerializationTest
             }
         }
 
+        protected override void WriteSingle(float val, string name)
+        {
+            data += val.GetType() + "(-)" + name + "(-)" + (string)val.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "(|)";
+        }
+
         protected override void WriteArray(object obj, string name, Type memberType)
         {
             throw new NotImplementedException();
@@ -221,11 +229,6 @@ namespace SerializationTest
         }
 
         protected override void WriteSByte(sbyte val, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void WriteSingle(float val, string name)
         {
             throw new NotImplementedException();
         }

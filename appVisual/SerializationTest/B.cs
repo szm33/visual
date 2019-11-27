@@ -7,25 +7,29 @@ namespace SerializationTest
     public class B : ISerializable
     {
         public string Name { get; set; }
+        public float Number { get; set; }
         internal C ClassC { get; set; }
 
         public B() { }
 
-        public B(C c, string name)
+        public B(C c, string name, float number)
         {
             ClassC = c;
             Name = name;
+            Number = number;
         }
 
         public B(SerializationInfo info, StreamingContext context)
         {
             Name = info.GetString("Name");
+            Number = info.GetSingle("Number");
             ClassC = (C)info.GetValue("ClassC", typeof(C));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Name", Name);
+            info.AddValue("Number", Number);
             info.AddValue("ClassC", ClassC, typeof(C));
         }
 
