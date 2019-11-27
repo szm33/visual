@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Zadanie1._0;
-using zadanie2;
+using Zad2;
 
 namespace SerializationTest
 {
     [TestClass]
     public class SerializationTest
     {
-   
+
 
         [TestMethod]
         public void SerialClassTestRekurencja()
@@ -71,7 +70,7 @@ namespace SerializationTest
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 osr.Serialize(fs, b);
-                
+
             }
             B b_tmp;
 

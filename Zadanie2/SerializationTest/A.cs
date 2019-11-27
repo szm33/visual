@@ -4,29 +4,29 @@ using System.Runtime.Serialization;
 namespace SerializationTest
 {
     [Serializable]
-    public class C : ISerializable
+    public class A : ISerializable
     {
         public string Name { get; set; }
         public float Number { get; set; }
         public DateTime Date { get; set; }
-        internal A ClassA { get; set; }
+        public B ClassB { get; set; }
 
-        public C() { }
+        public A() { }
 
-        public C(A a, string name, float number, DateTime date)
+        public A(B b, string name, float number, DateTime date)
         {
-            ClassA = a;
+            ClassB = b;
             Name = name;
             Number = number;
             Date = date;
         }
 
-        public C(SerializationInfo info, StreamingContext context)
+        public A(SerializationInfo info, StreamingContext context)
         {
             Name = info.GetString("Name");
             Number = info.GetSingle("Number");
             Date = info.GetDateTime("Date");
-            ClassA = (A)info.GetValue("ClassA", typeof(A));
+            ClassB = (B)info.GetValue("ClassB", typeof(B));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -34,7 +34,7 @@ namespace SerializationTest
             info.AddValue("Name", Name);
             info.AddValue("Number", Number);
             info.AddValue("Date", Date);
-            info.AddValue("ClassA", ClassA, typeof(A));
+            info.AddValue("ClassB", ClassB, typeof(B));
         }
 
         public override bool Equals(object obj)
@@ -44,8 +44,9 @@ namespace SerializationTest
                 return false;
             }
 
-            C c = (C)obj;
-            return Name == c.Name && ClassA.Name == c.ClassA.Name && ClassA.ClassB.Name == c.ClassA.ClassB.Name && Name == c.ClassA.ClassB.ClassC.Name;
+            A a = (A)obj;
+            return Name == a.Name && ClassB.Name == a.ClassB.Name && ClassB.ClassC.Name == a.ClassB.ClassC.Name && Name == a.ClassB.ClassC.ClassA.Name;
         }
     }
 }
+

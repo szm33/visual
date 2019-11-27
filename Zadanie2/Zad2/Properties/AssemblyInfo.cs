@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Ogólne informacje o zestawie są kontrolowane poprzez następujący 
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
-[assembly: AssemblyTitle("Zadanie1.0")]
+[assembly: AssemblyTitle("Zad2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Zadanie1.0")]
+[assembly: AssemblyProduct("Zad2")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Następujący identyfikator GUID jest identyfikatorem biblioteki typów w przypadku udostępnienia tego projektu w modelu COM
-[assembly: Guid("b8ad7164-b44a-4cfe-9200-fce27dabc019")]
+[assembly: Guid("3fc40ca4-ea39-4bce-9472-0c88acf97146")]
 
 // Informacje o wersji zestawu zawierają następujące cztery wartości:
 //

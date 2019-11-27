@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zadanie2
+namespace Zad2
 {
     public class SerialClass<T>
     {
@@ -55,7 +55,7 @@ namespace zadanie2
 
         }
 
-        
+
 
     }
 }

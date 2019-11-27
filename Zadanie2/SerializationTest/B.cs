@@ -1,32 +1,35 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SerializationTest
 {
     [Serializable]
-    public class A : ISerializable
+    public class B : ISerializable
     {
         public string Name { get; set; }
         public float Number { get; set; }
         public DateTime Date { get; set; }
-        internal B ClassB { get; set; }
+        public C ClassC { get; set; }
 
-        public A() { }
+        public B() { }
 
-        public A(B b, string name, float number, DateTime date)
+        public B(C c, string name, float number, DateTime date)
         {
-            ClassB = b;
+            ClassC = c;
             Name = name;
             Number = number;
             Date = date;
         }
 
-        public A(SerializationInfo info, StreamingContext context)
+        public B(SerializationInfo info, StreamingContext context)
         {
             Name = info.GetString("Name");
             Number = info.GetSingle("Number");
             Date = info.GetDateTime("Date");
-            ClassB = (B)info.GetValue("ClassB", typeof(B));
+            ClassC = (C)info.GetValue("ClassC", typeof(C));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -34,7 +37,7 @@ namespace SerializationTest
             info.AddValue("Name", Name);
             info.AddValue("Number", Number);
             info.AddValue("Date", Date);
-            info.AddValue("ClassB", ClassB, typeof(B));
+            info.AddValue("ClassC", ClassC, typeof(C));
         }
 
         public override bool Equals(object obj)
@@ -44,8 +47,10 @@ namespace SerializationTest
                 return false;
             }
 
-            A a = (A)obj;
-            return Name == a.Name && ClassB.Name == a.ClassB.Name && ClassB.ClassC.Name == a.ClassB.ClassC.Name && Name == a.ClassB.ClassC.ClassA.Name;
+            B b = (B)obj;
+            return Name == b.Name && ClassC.Name == b.ClassC.Name && ClassC.ClassA.Name == b.ClassC.ClassA.Name && Name == b.ClassC.ClassA.ClassB.Name;
         }
+
     }
 }
+

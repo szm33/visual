@@ -6,9 +6,10 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SerializationTest
 {
-    class OwnSerializationRecurent : Formatter
+    public class OwnSerializationRecurent : Formatter
     {
         public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -118,7 +119,7 @@ namespace SerializationTest
 
         private void GetDataOfObjectsToDeserialize(SerializationInfo info, string[] splitRowOfData)
         {
-            for (int i = 2; i < splitRowOfData.Length-1; i++)
+            for (int i = 2; i < splitRowOfData.Length - 1; i++)
             {
                 string[] property = splitRowOfData[i].Split(new string[] { "(-)" }, StringSplitOptions.None);
 
