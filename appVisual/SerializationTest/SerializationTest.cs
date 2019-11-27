@@ -120,22 +120,23 @@ namespace SerializationTest
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
-                osr.Serialize(fs, a);
+                osr.Serialize(fs, b);
                 
             }
             string result = File.ReadAllText(path);
 
             System.Diagnostics.Debug.WriteLine(result);
-            A a_tmp;
+            B a_tmp;
 
             using (FileStream s = new FileStream(path, FileMode.Open))
             {
-                a_tmp = (A)osr.Deserialize(s);
+                a_tmp = (B)osr.Deserialize(s);
             }
 
             System.Diagnostics.Debug.WriteLine(result);
 
-            System.Diagnostics.Debug.WriteLine(a_tmp.Name);
+            System.Diagnostics.Debug.WriteLine(a_tmp.GetType().ToString());
+            System.Diagnostics.Debug.WriteLine(a_tmp.ClassC.Name);
             
 
         }

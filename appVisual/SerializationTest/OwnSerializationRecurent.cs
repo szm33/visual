@@ -41,13 +41,9 @@ namespace SerializationTest
                     Type objectType = Type.GetType(splitRowOfData[0]);
                     SerializationInfo info = new SerializationInfo(objectType, new FormatterConverter());
 
-                    foreach(var k in splitRowOfData)
-                    {
-                        System.Diagnostics.Debug.WriteLine(k);
-                    }
-
                     GetDataOfObjectsToDeserialize(info, splitRowOfData);
                     Type[] constructorTypes = { info.GetType(), Context.GetType() };
+
                     object[] constructorParameters = { info, Context };
                     dataForReference[splitRowOfData[1]].GetType().GetConstructor(constructorTypes).Invoke(dataForReference[splitRowOfData[1]], constructorParameters);
                 }
@@ -122,10 +118,6 @@ namespace SerializationTest
             for (int i = 2; i < splitRowOfData.Length-1; i++)
             {
                 string[] property = splitRowOfData[i].Split(new string[] { "(-)" }, StringSplitOptions.None);
-                foreach(var k in property)
-                {
-                    System.Diagnostics.Debug.WriteLine(k);
-                }
 
                 if (CustomType(property[0]))
                 {
