@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Zad2sa
+namespace Zad2
 {
     public class OwnSerializationRecurent : Formatter
     {
@@ -33,13 +33,13 @@ namespace Zad2sa
                 foreach (string obj in dataForDeserialization)
                 {
                     string[] separatedObj = obj.Split(new string[] { "(|)" }, StringSplitOptions.None);
-                    dataForReference.Add(separatedObj[1], FormatterServices.GetSafeUninitializedObject(Type.GetType(separatedObj[0])));
+                    dataForReference.Add(separatedObj[1], FormatterServices.GetSafeUninitializedObject(Type.GetType(separatedObj[0]+ ", " + separatedObj[0].Split('.').ToList()[0])));
                 }
 
                 foreach (string row in dataForDeserialization)
                 {
                     string[] splitRowOfData = row.Split(new string[] { "(|)" }, StringSplitOptions.None);
-                    Type objectType = Type.GetType(splitRowOfData[0]);
+                    Type objectType = Type.GetType(splitRowOfData[0] + ", " + splitRowOfData[0].Split('.').ToList()[0]);
                     SerializationInfo info = new SerializationInfo(objectType, new FormatterConverter());
 
                     GetDataOfObjectsToDeserialize(info, splitRowOfData);
@@ -125,7 +125,7 @@ namespace Zad2sa
 
                 if (CustomType(property[0]))
                 {
-                    info.AddValue(property[1], dataForReference[property[2]], Type.GetType(property[0]));
+                    info.AddValue(property[1], dataForReference[property[2]], Type.GetType(property[0] + ", " + property[0].Split('.').ToList()[0]));
                 }
                 else
                 {
