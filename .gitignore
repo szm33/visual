@@ -2,9 +2,10 @@
 # Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
 ################################################################################
 
-task/.vs
+task3/.vs
 task3/TestResults/
 task3/packages
+task3/AdventureWorks2014_Data.mdf
 
 task3/TestResults/
 task3/packages
