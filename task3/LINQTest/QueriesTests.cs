@@ -46,5 +46,54 @@ namespace LINQTest
             string vendorName = Queries.GetProductVendorByProductName("Thin-Jam Hex Nut 9");
             System.Diagnostics.Debug.WriteLine(vendorName);
         }
+
+        [TestMethod]
+        public void GetProductsWithNRecentReviewsTest()
+        {
+
+        }
+
+        [TestMethod]
+        public void GetNRecentlyReviewedProductsTest()
+        {
+            List<Product> products = Queries.GetNRecentlyReviewedProducts(2);
+
+            foreach (var pn in products)
+            {
+                System.Diagnostics.Debug.WriteLine(pn.Name);
+            }
+        }
+
+        [TestMethod]
+        public void GetNProductsFromCategoryTest()
+        {
+            List<Product> products = Queries.GetNProductsFromCategory("Bikes", 2);
+
+            foreach (var pn in products)
+            {
+                System.Diagnostics.Debug.WriteLine(pn.Name);
+            }
+        }
+
+        [TestMethod]
+        public void GetTotalStandardCostByCategory()
+        {
+            decimal standartCost = Queries.GetTotalStandardCostByCategory(Queries.GetProductCategoryByName("Bikes"));
+            System.Diagnostics.Debug.WriteLine(standartCost);
+        }
+
+        [TestMethod]
+        public void test()
+        {
+            List<Product> products = Queries.GetProductsByName("");
+
+            foreach (var pn in products)
+            {
+                System.Diagnostics.Debug.WriteLine(pn.Name);
+            }
+            System.Diagnostics.Debug.WriteLine("");
+
+            System.Diagnostics.Debug.WriteLine(products.ToStringProductsWithVendors());
+        }
     }
 }
