@@ -8,22 +8,41 @@ namespace LINQ
 {
     public static class ExtensionsMethods
     {
-        public static List<Product> GetProductsWithoutCategory(this List<Product> products)
-        {
-            List<Product> productsWithoutCategory = new List<Product>();
-            foreach (Product product in products)
+        /*    public static List<Product> GetProductsWithoutCategory(this List<Product> products)
             {
-                if (product.ProductSubcategoryID == null)
+                List<Product> productsWithoutCategory = new List<Product>();
+                foreach (Product product in products)
                 {
-                    productsWithoutCategory.Add(product);
+                    if (product.ProductSubcategoryID == null)
+                    {
+                        productsWithoutCategory.Add(product);
+                    }
                 }
-            }
-            return productsWithoutCategory;
+                return productsWithoutCategory;
+            }*/
+
+        public static List<Product> GetProductsWithoutCategoryImperative(this List<Product> products)
+        {
+            return products.Where(p => p.ProductSubcategoryID == null).Select(p => p).ToList();
         }
 
-        public static List<Product> GetPageWithProducts(this List<Product> products, int pageSize, int pageNumber)
+        public static List<Product> GetProductsWithoutCategoryDeclarative(this List<Product> products)
+        {
+            return (from product in products
+                    where product.ProductSubcategoryID == null
+                    select product).ToList();
+        }
+
+        public static List<Product> GetPageWithProductsImperative(this List<Product> products, int pageSize, int pageNumber)
         {
             return products.Where(p => products.IndexOf(p) / pageSize == pageNumber - 1).Select(p => p).ToList();
+        }
+
+        public static List<Product> GetPageWithProductsDeclarative(this List<Product> products, int pageSize, int pageNumber)
+        {
+            return (from product in products
+                    where products.IndexOf(product) / pageSize == pageNumber - 1
+                    select product).ToList();
         }
 
         public static string ToStringProductsWithVendors(this List<Product> products)
@@ -32,12 +51,14 @@ namespace LINQ
             foreach(Product product in products)
             {
                 var vendors = Queries.GetVendorsByProductID(product.ProductID);
-                sb.Append(product.Name);
+                
                 foreach(var vendor in vendors)
                 {
+                    sb.Append(product.Name);
                     sb.Append("-" + vendor.Name);
+                    sb.Append(Environment.NewLine);
                 }
-                sb.Append(Environment.NewLine);
+                
             }
 
             return sb.ToString();

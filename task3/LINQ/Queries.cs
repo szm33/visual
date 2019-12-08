@@ -26,6 +26,8 @@ namespace LINQ
                     select product).ToList();
         }
 
+      
+
         public static List<string> GetProductNamesByVendorName(string vendorName)
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
@@ -102,6 +104,16 @@ namespace LINQ
                     where product.ProductID.Equals(productId)
                     select vendor).ToList();
         }
+
+
+    public static List<Product> GetAllProducts()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from product in db.Product
+                    select product).ToList();
+
+        }
+       
 
     }
 }
