@@ -2,24 +2,14 @@
 # Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
 ################################################################################
 
-/appVisual/.vs/appVisual/v16/Server/sqlite3/db.lock
-.vs
-/appVisual/.vs/appVisual/v16
-appVisual/Zadanie1.0/obj/
-appVisual/Zadanie1.0/bin/
-appVisual/zadanie2/obj/
-appVisual/zadanie2/bin/
-appVisual/DataRepositoryTest/bin/
-appVisual/DataRepositoryTest/obj/
-appVisual/SerializationTest/bin/*
-appVisual/SerializationTest/obj/*
-appVisual/Serialization/bin/*
-appVisual/Serialization/obj/*
-appVisual/TestResults/
-appVisual/packages
-Zadanie2/SerializationTest/bin/*
-Zadanie2/SerializationTest/obj/*
-Zadanie2/TestResults/
-Zadanie2/packages
-Zadanie2/Zad2/bin/*
-Zadanie2/Zad2/obj/*
+task3/.vs
+task3/TestResults/
+task3/packages
+task3/AdventureWorks2014_Data.mdf
+
+task3/TestResults/
+task3/packages
+task3/LINQ/bin/*
+task3/LINQ/obj/*
+task3/LINQTest/bin/*
+task3/LINQTest/obj/*
