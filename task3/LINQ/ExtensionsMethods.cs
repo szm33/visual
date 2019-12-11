@@ -8,19 +8,6 @@ namespace LINQ
 {
     public static class ExtensionsMethods
     {
-        /*    public static List<Product> GetProductsWithoutCategory(this List<Product> products)
-            {
-                List<Product> productsWithoutCategory = new List<Product>();
-                foreach (Product product in products)
-                {
-                    if (product.ProductSubcategoryID == null)
-                    {
-                        productsWithoutCategory.Add(product);
-                    }
-                }
-                return productsWithoutCategory;
-            }*/
-
         public static List<Product> GetProductsWithoutCategoryImperative(this List<Product> products)
         {
             return products.Where(p => p.ProductSubcategoryID == null).Select(p => p).ToList();

@@ -121,11 +121,24 @@ namespace LINQ
                     select myProduct).ToList();
         }
 
-        //public static List<MyProduct> GetMyProductsByVendorName(string vendorName)
-        //{
-        //    MyProductRepository myProductRepository = new MyProductRepository();
-        //    return myProductRepository.GetMyProductsList().Where(p => p.ProductVendor.GetEnumerator().)
-        //}
+        public static List<MyProduct> GetMyProductsByVendorName(string vendorName)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            MyProductRepository mpr = new MyProductRepository();
+            return (from myProduct in mpr.GetMyProductsList()
+                    join productVendor in db.ProductVendor on myProduct.ProductID equals productVendor.ProductID
+                    join vendor in db.Vendor on productVendor.BusinessEntityID equals vendor.BusinessEntityID
+                    where vendor.Name.Equals(vendorName)
+                    select myProduct).ToList();
+        }
+
+        public static List<MyProduct> GetMyProductsWithNRecentReviews(int howManyReviews)
+        {
+            MyProductRepository mpr = new MyProductRepository();
+            return (from myProduct in mpr.GetMyProductsList()
+                    where myProduct.ProductReview.Count == howManyReviews
+                    select myProduct).ToList();
+        }
 
     }
 }

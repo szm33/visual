@@ -10,8 +10,11 @@ namespace LINQ
     {
         public MyProduct(Product product)
         {
-            this.Name = product.Name;
-            this.ProductID = product.ProductID;
+            ProductID = product.ProductID;
+            Name = product.Name;
+            ProductSubcategoryID = product.ProductSubcategoryID;
+            ProductReview = product.ProductReview;
+
         }
     }
 }
