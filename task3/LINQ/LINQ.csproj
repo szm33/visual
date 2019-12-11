@@ -42,10 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBase.cs">
-      <DependentUpon>DataBase.dbml</DependentUpon>
-    </Compile>
     <Compile Include="ExtensionsMethods.cs" />
+    <Compile Include="MyProduct.cs" />
+    <Compile Include="MyProductRepository.cs" />
     <Compile Include="Queries.cs" />
     <Compile Include="DataBase.designer.cs">
       <AutoGen>True</AutoGen>

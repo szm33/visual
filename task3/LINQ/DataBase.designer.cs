@@ -138,14 +138,6 @@ namespace LINQ
 				return this.GetTable<ProductVendor>();
 			}
 		}
-		
-		public System.Data.Linq.Table<MyProduct> MyProduct
-		{
-			get
-			{
-				return this.GetTable<MyProduct>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Product")]
@@ -2365,15 +2357,6 @@ namespace LINQ
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Product")]
-	public partial class MyProduct
-	{
-		
-		public MyProduct()
-		{
 		}
 	}
 }

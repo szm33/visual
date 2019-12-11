@@ -57,7 +57,8 @@ namespace LINQTest
         [TestMethod]
         public void GetProductsWithNRecentReviewsTest()
         {
-
+            List<Product> products = Queries.GetProductsWithNRecentReviews(1);
+            Assert.AreEqual(2, products.Count);
         }
 
         [TestMethod]
@@ -85,7 +86,7 @@ namespace LINQTest
         }
 
         [TestMethod]
-        public void GetTotalStandardCostByCategory()
+        public void GetTotalStandardCostByCategoryTest()
         {
             decimal standartCost = Queries.GetTotalStandardCostByCategory(Queries.GetProductCategoryByName("Bikes"));
             System.Diagnostics.Debug.WriteLine(standartCost);
@@ -93,21 +94,16 @@ namespace LINQTest
         }
 
         [TestMethod]
-        public void test()
+        public void ToStringProductsWithVendorsTest()
         {
-            List<Product> products = Queries.GetProductsByName("");
+            List<Product> products = Queries.GetAllProducts();
+            int numLines = products.ToStringProductsWithVendors().Split('\n').Length;
+            Assert.AreEqual(461, numLines);
 
-            foreach (var pn in products)
-            {
-                System.Diagnostics.Debug.WriteLine(pn.Name);
-            }
-            System.Diagnostics.Debug.WriteLine("");
-
-            System.Diagnostics.Debug.WriteLine(products.ToStringProductsWithVendors());
         }
 
         [TestMethod]
-        public void GetProductsWithoutCategoryImperative()
+        public void GetProductsWithoutCategoryImperativeTest()
         {
             List<Product> products = Queries.GetAllProducts();
             products = products.GetProductsWithoutCategoryImperative();
@@ -115,7 +111,7 @@ namespace LINQTest
         }
 
         [TestMethod]
-        public void GetProductsWithoutCategoryDeclarative()
+        public void GetProductsWithoutCategoryDeclarativeTest()
         {
             List<Product> products = Queries.GetAllProducts();
             products = products.GetProductsWithoutCategoryDeclarative();
@@ -123,7 +119,7 @@ namespace LINQTest
         }
 
         [TestMethod]
-        public void GetPageWithProductsImperative()
+        public void GetPageWithProductsImperativeTest()
         {
             List<Product> products = Queries.GetAllProducts();
             products = products.GetPageWithProductsImperative(7,2);
@@ -131,7 +127,7 @@ namespace LINQTest
         }
 
         [TestMethod]
-        public void GetPageWithProductsDeclarative()
+        public void GetPageWithProductsDeclarativeTest()
         {
             List<Product> products = Queries.GetAllProducts();
             products = products.GetPageWithProductsDeclarative(7, 2);

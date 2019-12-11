@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LINQ
 {
-    public class Queries
+    public static class Queries
     {
         public static List<Product> GetProductsByName(string namePart)
         {
@@ -48,14 +48,13 @@ namespace LINQ
                     select vendor.Name).First();
         }
 
-        //public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
-        //{
-        //    DataClasses1DataContext db = new DataClasses1DataContext();
-        //    return (from product in db.Product
-        //            join productReview in db.ProductReview on product.ProductID equals productReview.ProductID
-        //            orderby productReview.ReviewDate descending
-        //            select product).Take(howManyReviews).ToList();
-        //}
+        public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from product in db.Product
+                     where product.ProductReview.Count == howManyReviews
+                     select product).ToList();
+        }
 
         public static List<Product> GetNRecentlyReviewedProducts(int howManyReviews)
         {
@@ -106,14 +105,27 @@ namespace LINQ
         }
 
 
-    public static List<Product> GetAllProducts()
+        public static List<Product> GetAllProducts()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
             return (from product in db.Product
                     select product).ToList();
 
         }
-       
+
+        public static List<MyProduct> GetMyProductsByName(string namePart)
+        {
+            MyProductRepository myProductRepository = new MyProductRepository();
+            return (from myProduct in myProductRepository.GetMyProductsList()
+                    where myProduct.Name.StartsWith(namePart)
+                    select myProduct).ToList();
+        }
+
+        //public static List<MyProduct> GetMyProductsByVendorName(string vendorName)
+        //{
+        //    MyProductRepository myProductRepository = new MyProductRepository();
+        //    return myProductRepository.GetMyProductsList().Where(p => p.ProductVendor.GetEnumerator().)
+        //}
 
     }
 }

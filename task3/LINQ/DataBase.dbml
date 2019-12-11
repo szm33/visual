@@ -104,7 +104,4 @@
       <Association Name="Vendor_ProductVendor" Member="Vendor" ThisKey="BusinessEntityID" OtherKey="BusinessEntityID" Type="Vendor" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="Production.Product" Member="MyProduct">
-    <Type Name="MyProduct" />
-  </Table>
 </Database>
