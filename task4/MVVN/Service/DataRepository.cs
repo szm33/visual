@@ -12,6 +12,7 @@ namespace Service
             using (DataBaseDataContext db = new DataBaseDataContext())
             {
                 return (from vendor in db.Vendor
+                        where vendor.ActiveFlag == true
                         select vendor).ToList();
             }
         }
@@ -40,8 +41,20 @@ namespace Service
         {
             using (DataBaseDataContext db = new DataBaseDataContext())
             {
-                db.Vendor.InsertOnSubmit(vendor);
-                db.SubmitChanges();
+                Vendor v = (from vTmp in db.Vendor
+                            where vTmp.BusinessEntityID == vendor.BusinessEntityID
+                            select vTmp).FirstOrDefault();
+                if (v == null)
+                {
+                    db.Vendor.InsertOnSubmit(vendor);
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    v.ActiveFlag = true;
+                    db.SubmitChanges();
+                }
+                
             }
         }
 
@@ -64,7 +77,7 @@ namespace Service
                 Vendor vendorToDelete = (from v in db.Vendor
                                          where v.BusinessEntityID == id
                                          select v).SingleOrDefault();
-                db.Vendor.DeleteOnSubmit(vendorToDelete);
+                vendorToDelete.ActiveFlag = false;
                 db.SubmitChanges();
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphicalData.ViewData
 {
-    interface IViewModelHelper
+    public interface IViewModelHelper
     {
         void Show(string errorName, string errorMessage);
         void ShowInfo();

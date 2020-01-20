@@ -13,3 +13,7 @@ task3/LINQ/bin/*
 task3/LINQ/obj/*
 task3/LINQTest/bin/*
 task3/LINQTest/obj/*
+
+task4/.vs
+task4/MVVM/*/bin
+task4/MVVM/*/obj

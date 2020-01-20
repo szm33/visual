@@ -8,7 +8,7 @@ using GraphicalData.ViewData.MVVMLight;
 
 namespace GraphicalData.ViewData
 {
-    class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         public MainViewModel()
         {
@@ -66,6 +66,7 @@ namespace GraphicalData.ViewData
         {
             Vendor vendor = new Vendor
             {
+                BusinessEntityID = Id,
                 Name = Name,
                 AccountNumber = RandomStringGenerator(15),
                 CreditRating = 1,
@@ -74,7 +75,7 @@ namespace GraphicalData.ViewData
                 ModifiedDate = DateTime.Now
             };
 
-            if (vendor.Name == null || vendor.Name == "")
+            if (string.IsNullOrEmpty(Name))
             {
                 ViewModelHelper.Show("Name cannot be empty", "AddVendor");
             }
@@ -108,18 +109,26 @@ namespace GraphicalData.ViewData
 
         public void GetInfo()
         {
-            Task.Run(() =>
+            if (Id == 0)
             {
-                Vendors = new ObservableCollection<Vendor>();
-                Vendor = m_DataRepository.GetVendroById(Id);
-                Vendors.Add(Vendor);
-            });
-            ViewModelHelper.ShowInfo();
+                ViewModelHelper.Show("ID cannot be 0", "GetInfoVendor");
+            }
+            else
+            {
+                Task.Run(() =>
+                {
+                    Vendors = new ObservableCollection<Vendor>();
+                    Vendor = m_DataRepository.GetVendroById(Id);
+                    Vendors.Add(Vendor);
+                });
+                ViewModelHelper.ShowInfo();
+            }
+            
         }
 
         public void UpdateVendor()
         {
-            if (Name == null || Name == "" || Id == 0)
+            if (string.IsNullOrEmpty(Name) || Id == 0)
             {
                 ViewModelHelper.Show("Wrong Vendor name|id", "UpdateVendor");
             }

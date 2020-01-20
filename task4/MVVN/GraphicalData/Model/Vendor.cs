@@ -12,7 +12,7 @@ namespace GraphicalData.Model
         {
             return "Name: " + Name + ", ID: " + BusinessEntityID;
         }
-        public string Info
+        public string GetInfo
         {
             get => ToString();
         }

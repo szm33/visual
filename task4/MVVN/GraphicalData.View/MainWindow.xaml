@@ -4,9 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicalData.View"
+        xmlns:vd="clr-namespace:GraphicalData.ViewData;assembly=GraphicalData.ViewData"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vd:MainViewModel />
+    </Window.DataContext>
     <Grid>
-        
+        <ListBox ItemsSource ="{Binding Vendors, Mode=OneWay}" SelectedItem="{Binding Vendor}" HorizontalAlignment="Left" Height="269" Margin="10,26,0,0" VerticalAlignment="Top" Width="615">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding GetInfo}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="VendorNameTextBlock" HorizontalAlignment="Left" Margin="630,35,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Name}" x:Name="VendorNameTextBox" HorizontalAlignment="Left" Height="16" Margin="667,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Id}" x:Name="VendorIDTextBox" HorizontalAlignment="Left" Height="16" Margin="667,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="VendorIDTextBlock" HorizontalAlignment="Left" Margin="648,63,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="2.026,0.484"/>
+        <Button Command="{Binding FetchDataCommand}" x:Name="FetchData" Content="Fetch data" HorizontalAlignment="Left" Margin="21,330,0,0" VerticalAlignment="Top" Width="88" RenderTransformOrigin="0.5,0.5" Height="34"/>
+        <Button Command="{Binding AddVendorCommand}" x:Name="AddVendor" Content="Add Vendor" HorizontalAlignment="Left" Margin="146,330,0,0" VerticalAlignment="Top" Width="84" Height="34"/>
+        <Button Command="{Binding RemoveVendorCommand}" x:Name="RemoveVendor" Content="Remove Vendor" HorizontalAlignment="Left" Margin="275,330,0,0" VerticalAlignment="Top" Width="104" Height="34"/>
+        <Button Command="{Binding UpdateVendorCommand}" x:Name="UpdateVendor" Content="Update Vendor name" HorizontalAlignment="Left" Margin="437,330,0,0" VerticalAlignment="Top" Width="122" Height="34"/>
+        <Button Command="{Binding InfoVendorCommand}" x:Name="VendorInfo" Content="Detailed information" HorizontalAlignment="Left" Margin="617,330,0,0" VerticalAlignment="Top" Width="119" Height="34"/>
+        <Label Content="Vendors:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="58"/>
+
     </Grid>
 </Window>
