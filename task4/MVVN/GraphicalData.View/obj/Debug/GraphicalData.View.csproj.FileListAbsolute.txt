@@ -1,0 +1,14 @@
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\bin\Debug\GraphicalData.View.exe.config
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\bin\Debug\GraphicalData.View.exe
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\bin\Debug\GraphicalData.View.pdb
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.csprojAssemblyReference.cache
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\MainWindow.g.cs
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\App.g.cs
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View_MarkupCompile.cache
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View_MarkupCompile.lref
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\MainWindow.baml
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.g.resources
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.Properties.Resources.resources
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.csproj.GenerateResource.cache
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.exe
+C:\Users\Maciej\Desktop\TP\visual\task4\MVVN\GraphicalData.View\obj\Debug\GraphicalData.View.pdb
