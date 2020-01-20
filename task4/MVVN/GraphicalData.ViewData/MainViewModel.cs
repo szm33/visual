@@ -21,6 +21,18 @@ namespace GraphicalData.ViewData
 
         }
 
+        public MainViewModel(IDataRepository dataRepository)
+        {
+            DataRepository = dataRepository;
+            FetchDataCommand = new RelayCommand(() => DataRepository = dataRepository);
+            AddVendorCommand = new RelayCommand(AddVendor);
+            RemoveVendorCommand = new RelayCommand(RemoveVendor);
+            UpdateVendorCommand = new RelayCommand(UpdateVendor);
+            InfoVendorCommand = new RelayCommand(GetInfo);
+
+        }
+
+
         public ObservableCollection<Vendor> Vendors
         {
             get { return m_Vendors; }

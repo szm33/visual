@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicalData.View", "Graph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicalData.ViewData", "GraphicalData.ViewData\GraphicalData.ViewData.csproj", "{8A549341-E8EB-41BF-88B7-9A0AC01098CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicalData.ViewData.UnitTest", "GraphicalData.ViewData.UnitTest\GraphicalData.ViewData.UnitTest.csproj", "{950F5666-C542-4191-8307-D7422CCC3D00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8A549341-E8EB-41BF-88B7-9A0AC01098CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A549341-E8EB-41BF-88B7-9A0AC01098CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A549341-E8EB-41BF-88B7-9A0AC01098CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{950F5666-C542-4191-8307-D7422CCC3D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950F5666-C542-4191-8307-D7422CCC3D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950F5666-C542-4191-8307-D7422CCC3D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950F5666-C542-4191-8307-D7422CCC3D00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

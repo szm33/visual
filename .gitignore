@@ -14,6 +14,7 @@ task3/LINQ/obj/*
 task3/LINQTest/bin/*
 task3/LINQTest/obj/*
 
-task4/.vs
-task4/MVVM/*/bin
-task4/MVVM/*/obj
+task4/MVVN/.vs
+task4/MVVN/*/bin
+task4/MVVN/*/obj
+task4/MVVN/packages
