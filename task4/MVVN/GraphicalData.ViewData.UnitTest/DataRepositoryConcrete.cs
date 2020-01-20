@@ -8,11 +8,11 @@ using Service;
 
 namespace GraphicalData.ViewData.UnitTest
 {
-    class DataRepositoryMock : IDataRepository
+    class DataRepositoryConcrete : IDataRepository
     {
         private List<Vendor> vendors = new List<Vendor>();
 
-        public DataRepositoryMock()
+        public DataRepositoryConcrete()
         {
             Vendor vendor1 = new Vendor
             {

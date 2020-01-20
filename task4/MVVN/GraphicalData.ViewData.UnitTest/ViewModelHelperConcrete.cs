@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphicalData.ViewData.UnitTest
 {
-    class ViewModelHelperMock : IViewModelHelper
+    class ViewModelHelperConcrete : IViewModelHelper
     {
         public void Show(string errorName, string errorMessage)
         {

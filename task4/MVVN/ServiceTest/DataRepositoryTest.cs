@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ServiceTest
 {
     [TestClass]
-    public class UnitTest1
+    public class DataRepositoryTest
     {
         [TestMethod]
         public void TestMethod1()

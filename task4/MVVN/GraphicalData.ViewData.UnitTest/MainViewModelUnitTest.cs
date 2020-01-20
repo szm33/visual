@@ -15,8 +15,8 @@ namespace GraphicalData.ViewData.UnitTest
         public void AddVendorTest()
         {
             MainViewModel viewModel = new MainViewModel();
-            viewModel.ViewModelHelper = new ViewModelHelperMock();
-            viewModel.DataRepository = new DataRepositoryMock();
+            viewModel.ViewModelHelper = new ViewModelHelperConcrete();
+            viewModel.DataRepository = new DataRepositoryConcrete();
             viewModel.Name = "test";
             viewModel.Id = 3;
             viewModel.AddVendorCommand.Execute(null);
@@ -28,8 +28,8 @@ namespace GraphicalData.ViewData.UnitTest
         public void DeleteVendorTest()
         {
             MainViewModel viewModel = new MainViewModel();
-            viewModel.DataRepository = new DataRepositoryMock();
-            viewModel.ViewModelHelper = new ViewModelHelperMock();
+            viewModel.DataRepository = new DataRepositoryConcrete();
+            viewModel.ViewModelHelper = new ViewModelHelperConcrete();
             viewModel.Id = 2;
             viewModel.RemoveVendorCommand.Execute(null);
             Thread.Sleep(500);
@@ -40,8 +40,8 @@ namespace GraphicalData.ViewData.UnitTest
         public void UpdateVendorTest()
         {
             MainViewModel viewModel = new MainViewModel();
-            viewModel.ViewModelHelper = new ViewModelHelperMock();
-            viewModel.DataRepository = new DataRepositoryMock();
+            viewModel.ViewModelHelper = new ViewModelHelperConcrete();
+            viewModel.DataRepository = new DataRepositoryConcrete();
             viewModel.Id = 2;
             viewModel.Name = "vendorTest";
             viewModel.UpdateVendorCommand.Execute(null);
@@ -53,8 +53,8 @@ namespace GraphicalData.ViewData.UnitTest
         public void DataRepositoryTest()
         {
             MainViewModel viewModel = new MainViewModel();
-            viewModel.DataRepository = new DataRepositoryMock();
-            viewModel.ViewModelHelper = new ViewModelHelperMock();
+            viewModel.DataRepository = new DataRepositoryConcrete();
+            viewModel.ViewModelHelper = new ViewModelHelperConcrete();
             Assert.IsNotNull(viewModel.DataRepository);
         }
 
@@ -62,8 +62,8 @@ namespace GraphicalData.ViewData.UnitTest
         public void VendorsFetchTest()
         {
             MainViewModel viewModel = new MainViewModel();
-            viewModel.DataRepository = new DataRepositoryMock();
-            viewModel.ViewModelHelper = new ViewModelHelperMock();
+            viewModel.DataRepository = new DataRepositoryConcrete();
+            viewModel.ViewModelHelper = new ViewModelHelperConcrete();
             Thread.Sleep(500);
             Assert.AreEqual(2, viewModel.Vendors.Count);
         }

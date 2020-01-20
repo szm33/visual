@@ -49,10 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRepositoryMock.cs" />
+    <Compile Include="DataRepositoryConcrete.cs" />
     <Compile Include="MainViewModelUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelHelperMock.cs" />
+    <Compile Include="ViewModelHelperConcrete.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
