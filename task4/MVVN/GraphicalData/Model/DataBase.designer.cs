@@ -51,7 +51,7 @@ namespace GraphicalData.Model
     #endregion
 		
 		public DataBaseDataContext() : 
-				base(global::GraphicalData.Properties.Settings.Default.AdventureWorks2014ConnectionString1, mappingSource)
+				base(global::GraphicalData.Properties.Settings.Default.AdventureWorks2014ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

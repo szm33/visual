@@ -94,9 +94,9 @@ namespace GraphicalData.ViewDataStandard
 
         public void RemoveVendor()
         {
-            if (Id == 0)
+            if (Id <= 0)
             {
-                ViewModelHelper.Show("ID cannot be 0", "RemoveVendor");
+                ViewModelHelper.Show("ID cannot be smaller or equal than 0", "RemoveVendor");
             }
             else
             {
@@ -109,9 +109,9 @@ namespace GraphicalData.ViewDataStandard
 
         public void GetInfo()
         {
-            if (Id == 0)
+            if (Id <= 0)
             {
-                ViewModelHelper.Show("ID cannot be 0", "GetInfoVendor");
+                ViewModelHelper.Show("ID cannot be smaller or equal than 0", "GetInfoVendor");
             }
             else
             {
