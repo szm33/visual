@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GraphicalData.ViewData.MVVMLight;
+using GraphicalData.ViewDataStandard.MVVMLight;
 
-namespace GraphicalData.ViewData
+namespace GraphicalData.ViewDataStandard
 {
     public class MainViewModel : ViewModelBase
     {
@@ -20,18 +20,6 @@ namespace GraphicalData.ViewData
             InfoVendorCommand = new RelayCommand(GetInfo);
 
         }
-
-        public MainViewModel(IDataRepository dataRepository)
-        {
-            DataRepository = dataRepository;
-            FetchDataCommand = new RelayCommand(() => DataRepository = dataRepository);
-            AddVendorCommand = new RelayCommand(AddVendor);
-            RemoveVendorCommand = new RelayCommand(RemoveVendor);
-            UpdateVendorCommand = new RelayCommand(UpdateVendor);
-            InfoVendorCommand = new RelayCommand(GetInfo);
-
-        }
-
 
         public ObservableCollection<Vendor> Vendors
         {
@@ -135,7 +123,7 @@ namespace GraphicalData.ViewData
                 });
                 ViewModelHelper.ShowInfo();
             }
-            
+
         }
 
         public void UpdateVendor()

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace GraphicalData.ViewData.MVVMLight
+namespace GraphicalData.ViewDataStandard.MVVMLight
 {
 
     /// <summary>

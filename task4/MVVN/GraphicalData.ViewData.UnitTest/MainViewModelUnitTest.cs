@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GraphicalData.ViewData;
+using GraphicalData.ViewDataStandard;
 using GraphicalData.Model;
 using System.Linq;
 using System.Threading;

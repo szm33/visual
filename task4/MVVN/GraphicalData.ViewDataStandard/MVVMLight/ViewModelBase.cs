@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace GraphicalData.ViewData.MVVMLight
+namespace GraphicalData.ViewDataStandard.MVVMLight
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

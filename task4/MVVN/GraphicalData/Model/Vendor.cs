@@ -12,9 +12,20 @@ namespace GraphicalData.Model
         {
             return "Name: " + Name + ", ID: " + BusinessEntityID;
         }
+
+        public string DetailedInfoToString()
+        {
+            return "Name: " + Name + ", ID: " + BusinessEntityID + ", AccountNumber: " + AccountNumber;
+        }
+
+        public string DetailedInfo
+        {
+            get => DetailedInfoToString();
+        }
         public string GetInfo
         {
             get => ToString();
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using GraphicalData.ViewData;
+using GraphicalData.ViewDataStandard;
 
 
 namespace GraphicalData.View

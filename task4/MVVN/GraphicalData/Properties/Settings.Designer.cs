@@ -33,5 +33,16 @@ namespace GraphicalData.Properties {
                 return ((string)(this["AdventureWorks2014ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MACIEKLAPTOP;Initial Catalog=AdventureWorks2014;Integrated Security=T" +
+            "rue")]
+        public string AdventureWorks2014ConnectionString1 {
+            get {
+                return ((string)(this["AdventureWorks2014ConnectionString1"]));
+            }
+        }
     }
 }

@@ -58,9 +58,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphicalData.ViewData\GraphicalData.ViewData.csproj">
-      <Project>{8a549341-e8eb-41bf-88b7-9a0ac01098ca}</Project>
-      <Name>GraphicalData.ViewData</Name>
+    <ProjectReference Include="..\GraphicalData.ViewDataStandard\GraphicalData.ViewDataStandard.csproj">
+      <Project>{6fe8a66c-84c2-4875-a957-c3b2ed8baf2b}</Project>
+      <Name>GraphicalData.ViewDataStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\GraphicalData\GraphicalData.csproj">
       <Project>{e5061216-1662-4b6b-9ce2-2b0a4f07da2e}</Project>
