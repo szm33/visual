@@ -58,6 +58,8 @@
     <Compile Include="DetailedInfo.xaml.cs">
       <DependentUpon>DetailedInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validators\NotNullAndEmptyString.cs" />
+    <Compile Include="Validators\NotNullAndLowerThanZero.cs" />
     <Compile Include="ViewModelHelper.cs" />
     <Page Include="DetailedInfo.xaml">
       <SubType>Designer</SubType>

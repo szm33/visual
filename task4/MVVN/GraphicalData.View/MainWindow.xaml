@@ -4,14 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicalData.View"
+        xmlns:validators="clr-namespace:GraphicalData.View.Validators"
         xmlns:vd="clr-namespace:GraphicalData.ViewDataStandard;assembly=GraphicalData.ViewDataStandard"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <vd:MainViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="30">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <ListBox ItemsSource ="{Binding Vendors, Mode=OneWay}" SelectedItem="{Binding Vendor}" HorizontalAlignment="Left" Height="269" Margin="10,26,0,0" VerticalAlignment="Top" Width="615">
+        <ListBox ItemsSource ="{Binding Vendors, Mode=OneWay}" SelectedItem="{Binding Vendor}" HorizontalAlignment="Left" Height="269" Margin="10,26,0,0" VerticalAlignment="Top" Width="549">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -20,10 +37,28 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock x:Name="VendorNameTextBlock" HorizontalAlignment="Left" Margin="630,35,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Name}" x:Name="VendorNameTextBox" HorizontalAlignment="Left" Height="16" Margin="667,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding Id}" x:Name="VendorIDTextBox" HorizontalAlignment="Left" Height="16" Margin="667,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="VendorIDTextBlock" HorizontalAlignment="Left" Margin="648,63,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="2.026,0.484"/>
+        <TextBlock x:Name="VendorNameTextBlock" HorizontalAlignment="Left" Margin="582,35,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+        
+        <TextBox x:Name="VendorNameTextBox" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}" HorizontalAlignment="Left" Height="16" Margin="640,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <validators:NotNullAndEmptyString ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="VendorIDTextBox" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}" HorizontalAlignment="Left" Height="16" Margin="640,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Path="Id" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <validators:NotNullAndLowerThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>    
+        </TextBox>
+        <TextBlock x:Name="VendorIDTextBlock" HorizontalAlignment="Left" Margin="582,63,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="2.026,0.484"/>
         <Button Command="{Binding FetchDataCommand}" x:Name="FetchData" Content="Fetch data" HorizontalAlignment="Left" Margin="21,330,0,0" VerticalAlignment="Top" Width="88" RenderTransformOrigin="0.5,0.5" Height="34"/>
         <Button Command="{Binding AddVendorCommand}" x:Name="AddVendor" Content="Add Vendor" HorizontalAlignment="Left" Margin="146,330,0,0" VerticalAlignment="Top" Width="84" Height="34"/>
         <Button Command="{Binding RemoveVendorCommand}" x:Name="RemoveVendor" Content="Remove Vendor" HorizontalAlignment="Left" Margin="275,330,0,0" VerticalAlignment="Top" Width="104" Height="34"/>
