@@ -13,10 +13,13 @@
     </Window.DataContext>
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="30">!</TextBlock>
+            <!--<DockPanel>
+                <TextBlock Foreground="Red" FontSize="25">!</TextBlock>
                 <AdornedElementPlaceholder/>
-            </DockPanel>
+            </DockPanel>-->
+            <Border BorderBrush="Red" BorderThickness="2">
+                <AdornedElementPlaceholder />
+            </Border>
         </ControlTemplate>
 
         <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">

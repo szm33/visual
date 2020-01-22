@@ -109,17 +109,10 @@ namespace GraphicalData.ViewDataStandard
 
         public void GetInfo()
         {
-            if (Id <= 0)
-            {
-                ViewModelHelper.Show("ID cannot be smaller or equal than 0", "GetInfoVendor");
-            }
-            else
             {
                 Task.Run(() =>
                 {
-                    Vendors = new ObservableCollection<Vendor>();
-                    Vendor = m_DataRepository.GetVendroById(Id);
-                    Vendors.Add(Vendor);
+                    Vendors = new ObservableCollection<Vendor>(m_DataRepository.GetAllVendors());
                 });
                 ViewModelHelper.ShowInfo();
             }

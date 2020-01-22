@@ -56,6 +56,7 @@ namespace ServiceTest
             repo.AddVendor(vendor1);
             repo.UpdateVendorName("vendor2", 2);
             Assert.AreEqual("vendor2", repo.GetVendroById(2).Name);
+            repo.DeleteVendor(2);
         }
 
     }
